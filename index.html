@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap">
 <style>
   /* ============================================================
-     TOKENS — 所有颜色/字体都在这里，换风格只改这一块
+     TOKENS — every color and typeface lives here; restyling means editing this block only
      ============================================================ */
   :root {
     --bg:        #f3f5f7;
@@ -33,7 +33,7 @@
     --measure: 66ch;
   }
 
-  /* 风格 B：LAB —— 更紧凑、无衬线正文、冷灰 */
+  /* Style B — LAB: tighter, sans-serif body text, cool grey */
   :root[data-style="lab"] {
     --bg: #eef0f2;
     --surface: #ffffff;
@@ -42,7 +42,7 @@
     --font-body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
     --radius: 2px;
   }
-  /* 风格 C：WARM —— 暖纸张、砖红重点、衬底更柔和 */
+  /* Style C — WARM: warm paper ground, brick-red accent, softer edges */
   :root[data-style="warm"] {
     --bg: #f6f2ec;
     --surface: #fffdfa;
@@ -52,7 +52,7 @@
     --radius: 10px;
   }
 
-  /* 深色：只改底色/文字层，重点色与字体沿用各风格 */
+  /* Dark theme: grounds and text only — each style keeps its own accent and typefaces */
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       --bg: #0e1319;
@@ -133,7 +133,7 @@
   nav.main a:hover { color: var(--ink); background: var(--soft); }
   nav.main a[aria-current="true"] { color: var(--ink); background: var(--soft); }
 
-  /* 草稿用的风格切换条 —— 定稿前整块删掉 */
+  /* Draft-only style picker — delete this block before publishing */
   .styler { display: flex; align-items: center; gap: 6px; padding-block: 8px; border-top: 1px dashed var(--line); flex-wrap: wrap; }
   .styler button {
     font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
@@ -217,7 +217,7 @@
 
   footer.site { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var(--muted); font-size: 14px; }
 
-  /* TODO 提示块 —— 定稿前全部删掉 */
+  /* TODO callouts — delete all of them before publishing */
   .todo {
     font-family: var(--font-display); font-size: 13.5px; line-height: 1.55;
     color: var(--warn); background: var(--warn-soft); border-left: 2px solid var(--warn);
@@ -253,11 +253,11 @@
       </nav>
     </div>
     <div class="styler" role="group" aria-label="Draft style picker">
-      <span class="label">草稿风格</span>
+      <span class="label">Draft style</span>
       <button type="button" data-set="plex" aria-pressed="true">A · Plex</button>
       <button type="button" data-set="lab" aria-pressed="false">B · Lab</button>
       <button type="button" data-set="warm" aria-pressed="false">C · Warm</button>
-      <span class="label" style="margin-left:auto">定稿前删掉这一条</span>
+      <span class="label" style="margin-left:auto">Remove this bar before publishing</span>
     </div>
   </div>
 </header>
@@ -284,8 +284,9 @@
         <a class="btn ghost" href="#resume">One-page résumé</a>
       </div>
       <div class="todo">
-        <b>TODO：</b>这段 lede 是你的「电梯陈述」——一句话说清你能做什么、对谁有用。
-        建议改写成针对目标雇主（机器人本体 / 物流仓储 / 工业自动化）的语言，避免只写技术名词。
+        <b>TODO:</b> This lede is the elevator pitch — one sentence on what you can do and who it is useful to.
+        Rewrite it in the language of the employers you are targeting (robot manufacturers, warehouse
+        automation, industrial automation) rather than in method names alone.
       </div>
     </div>
   </section>
@@ -313,9 +314,10 @@
             looking for, and what you bring to it.]
           </p>
           <div class="todo">
-            <b>TODO：</b>作业要求里的 <b>known/new contract</b>（先说读者已知的，再引出新信息）和
-            <b>social value</b>（你的工作对人 / 社会的价值）最好在这一段就落地——例如“装配线上重复、伤手腕的工序”。
-            控制在 150–200 词，三段以内。
+            <b>TODO:</b> Two of the assignment's writing requirements should land right here: the
+            <b>known/new contract</b> (open each sentence with what the reader already knows, then add the new
+            information) and the <b>social value</b> of the work — for example, the repetitive assembly-line
+            motions that wear out people's wrists. Keep it to 150–200 words across three paragraphs.
           </div>
         </div>
       </div>
@@ -378,8 +380,9 @@
           </div>
         </div>
         <div class="tags"><span>Imitation learning</span><span>Diffusion policy</span><span>ACT</span><span>Residual RL</span><span>Isaac Sim</span></div>
-        <div class="todo"><b>TODO：</b>这是你最强的一个项目，建议放第一位并配一张 pipeline 图 + 一段 rollout 视频。
-        指标没出全也先写占位数字格式（如 “__ / 9 parts, __% success over __ trials”），提醒自己回填。</div>
+        <div class="todo"><b>TODO:</b> This is the strongest entry, so keep it first and give it a pipeline diagram
+        plus a rollout clip. Even before the final numbers are in, write the placeholders in their finished shape
+        (“__ / 9 parts, __% success over __ trials”) so you can see what is still missing.</div>
       </article>
 
       <!-- ---------- PROJECT 2 ---------- -->
@@ -442,7 +445,7 @@
         <h3>Bin-Picking for Ship Components</h3>
         <p class="tagline">A deployed bin-picking cell that grasped nine part types out of unsorted bins at roughly an 85% success rate.</p>
 
-        <div class="media"><span class="label">Media placeholder — cell photo or grasp sequence<br>（注意：拍照/截图前确认公司是否允许外传）</span></div>
+        <div class="media"><span class="label">Media placeholder — cell photo or grasp sequence<br>(check with the host lab before publishing any footage)</span></div>
 
         <div class="facts">
           <div><span class="label">My role</span><p class="ph">[intern — perception setup &amp; calibration]</p></div>
@@ -473,8 +476,9 @@
           messy, non-ideal hardware — useful evidence for a planning engineer.]</p></div>
         </div>
         <div class="tags"><span>Soft robotics</span><span>Fabrication</span><span>Modeling</span></div>
-        <div class="todo"><b>TODO：</b>作业说额外内容会被点评但不计入评分，所以这一块保持简短。
-        还有两个可选条目可以顶替它：Shadow Hand 手内重定向 (PPO/SAC/GenPO) 和 多旋翼避障最优控制 (24-785)。</div>
+        <div class="todo"><b>TODO:</b> The assignment says additional material gets comments but is not graded, so keep
+        this entry short. Two alternates could take its place: Shadow Hand in-hand reorientation (PPO / SAC / GenPO)
+        and multi-quadrotor obstacle avoidance via optimal control (24-785).</div>
       </article>
     </div>
   </section>
@@ -522,8 +526,9 @@
           </ul>
         </div>
       </div>
-      <div class="todo"><b>TODO：</b>作业要求「让雇主一眼找到他们要的技能」。
-      建议把目标岗位 JD 里的关键词逐条比对，确保出现在这一屏；顺序按你最想被雇的岗位排。</div>
+      <div class="todo"><b>TODO:</b> The assignment asks you to make it easy for employers to find the skills they are
+      looking for. Read the postings you actually want, check their keywords against this screen one by one, and
+      order the columns by the role you most want to be hired for.</div>
     </div>
   </section>
 
@@ -544,8 +549,10 @@
             <a class="btn ghost" href="#contact">Ask for the other version</a>
           </div>
           <div class="todo">
-            <b>TODO：</b>课程要的是英文一页简历，你现在的是中文 docx 版本，需要重排一版英文 Letter 尺寸的。
-            页面上放 PDF（浏览器直接预览、不会乱版），同时挂一个下载链接。两个版本（规控 / 学习）建议线上只放一版，另一版按需发。
+            <b>TODO:</b> The course wants a one-page résumé in English; the current one is a Chinese docx, so it needs
+            a US Letter rewrite. Serve it as a PDF — it previews in the browser and the layout cannot shift — with a
+            download link beside it. Publish only one of your two versions (planning &amp; controls, or learning) and
+            send the other on request.
           </div>
         </div>
       </div>
@@ -577,7 +584,7 @@
 </footer>
 
 <script>
-  // ---- 草稿风格切换（定稿前连同 .styler 一起删掉）----
+  // ---- Draft style picker (delete this along with .styler before publishing) ----
   (function () {
     var root = document.documentElement;
     var btns = Array.prototype.slice.call(document.querySelectorAll('.styler button'));
@@ -594,7 +601,7 @@
     } catch (e) {}
   })();
 
-  // ---- 导航高亮：当前滚动到的区块 ----
+  // ---- Nav highlighting: mark the section currently in view ----
   (function () {
     var links = Array.prototype.slice.call(document.querySelectorAll('nav.main a'));
     var map = {};

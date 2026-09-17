@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Engineering portfolio of Haozheng (Benny) Zhu - robotics motion planning and manipulation learning.">
+<title>Haozheng Zhu Robotics Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+  /* ============================================================
+     TOKENS — 所有颜色/字体都在这里，换风格只改这一块
+     ============================================================ */
+  :root {
+    --bg:        #f3f5f7;
+    --surface:   #ffffff;
+    --ink:       #12181f;
+    --muted:     #5a6774;
+    --line:      #d8dee5;
+    --accent:    #1d5c72;
+    --accent-ink:#ffffff;
+    --soft:      #e7eef2;
+    --warn:      #9a5b12;
+    --warn-soft: #fbf1e2;
+
+    --font-display: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+    --font-body:    "IBM Plex Serif", Georgia, "Times New Roman", serif;
+    --font-mono:    "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+
+    --radius: 4px;
+    --maxw: 1080px;
+    --measure: 66ch;
+  }
+
+  /* 风格 B：LAB —— 更紧凑、无衬线正文、冷灰 */
+  :root[data-style="lab"] {
+    --bg: #eef0f2;
+    --surface: #ffffff;
+    --accent: #2f4858;
+    --soft: #e4e8eb;
+    --font-body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+    --radius: 2px;
+  }
+  /* 风格 C：WARM —— 暖纸张、砖红重点、衬底更柔和 */
+  :root[data-style="warm"] {
+    --bg: #f6f2ec;
+    --surface: #fffdfa;
+    --line: #e2d9cc;
+    --accent: #8a3f2a;
+    --soft: #f1e5dd;
+    --radius: 10px;
+  }
+
+  /* 深色：只改底色/文字层，重点色与字体沿用各风格 */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0e1319;
+      --surface: #161d25;
+      --ink: #e8edf2;
+      --muted: #97a4b2;
+      --line: #2a343f;
+      --soft: #1d2732;
+      --accent: #6fb3c9;
+      --accent-ink: #0e1319;
+      --warn: #e0ab6a;
+      --warn-soft: #2a2317;
+    }
+    :root[data-style="warm"]:not([data-theme="light"]) { --accent: #e08a6d; --soft: #2a1f1a; --line: #33282320; }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0e1319;
+    --surface: #161d25;
+    --ink: #e8edf2;
+    --muted: #97a4b2;
+    --line: #2a343f;
+    --soft: #1d2732;
+    --accent: #6fb3c9;
+    --accent-ink: #0e1319;
+    --warn: #e0ab6a;
+    --warn-soft: #2a2317;
+  }
+  :root[data-style="warm"][data-theme="dark"] { --accent: #e08a6d; --soft: #2a1f1a; }
+
+  /* ============================================================
+     BASE
+     ============================================================ */
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 600; text-wrap: balance; margin: 0; line-height: 1.2; }
+  p { margin: 0; }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  img { max-width: 100%; }
+
+  .wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: 20px; }
+  .label {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .skip {
+    position: absolute; left: -9999px; top: 0; background: var(--accent); color: var(--accent-ink);
+    padding: 10px 16px; z-index: 100;
+  }
+  .skip:focus { left: 8px; top: 8px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  /* ============================================================
+     HEADER / NAV
+     ============================================================ */
+  header.site {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 40;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .bar { display: flex; align-items: center; gap: 16px; padding-block: 12px; flex-wrap: wrap; }
+  .wordmark { font-family: var(--font-display); font-weight: 600; font-size: 16px; letter-spacing: -.01em; text-decoration: none; color: var(--ink); }
+  .wordmark span { color: var(--muted); font-weight: 400; }
+  nav.main { margin-left: auto; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; max-width: 100%; }
+  nav.main::-webkit-scrollbar { display: none; }
+  nav.main a {
+    font-family: var(--font-display); font-size: 14px; text-decoration: none; color: var(--muted);
+    padding: 6px 10px; border-radius: var(--radius); white-space: nowrap;
+  }
+  nav.main a:hover { color: var(--ink); background: var(--soft); }
+  nav.main a[aria-current="true"] { color: var(--ink); background: var(--soft); }
+
+  /* 草稿用的风格切换条 —— 定稿前整块删掉 */
+  .styler { display: flex; align-items: center; gap: 6px; padding-block: 8px; border-top: 1px dashed var(--line); flex-wrap: wrap; }
+  .styler button {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+    background: transparent; color: var(--muted); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 4px 9px; cursor: pointer;
+  }
+  .styler button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+
+  /* ============================================================
+     SECTIONS
+     ============================================================ */
+  section { padding-block: 64px; scroll-margin-top: 96px; }
+  section + section { border-top: 1px solid var(--line); }
+  .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 28px; flex-wrap: wrap; }
+  .sec-head h2 { font-size: clamp(24px, 3.4vw, 32px); }
+
+  /* HERO */
+  .hero { padding-block: clamp(56px, 9vw, 96px) 64px; }
+  .hero h1 { font-size: clamp(34px, 6vw, 56px); letter-spacing: -.02em; }
+  .hero .lede { font-size: clamp(18px, 2.3vw, 21px); color: var(--muted); max-width: var(--measure); margin-top: 18px; }
+  .hero-meta { display: flex; gap: 10px 22px; flex-wrap: wrap; margin-top: 28px; }
+  .cta-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 28px; }
+  .btn {
+    font-family: var(--font-display); font-size: 14px; text-decoration: none;
+    padding: 10px 18px; border-radius: var(--radius); border: 1px solid var(--accent);
+    background: var(--accent); color: var(--accent-ink);
+  }
+  .btn.ghost { background: transparent; color: var(--accent); }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 220px 1fr; gap: 36px; align-items: start; }
+  .about-grid p + p { margin-top: 14px; }
+  .about-grid .body { max-width: var(--measure); }
+  .portrait {
+    aspect-ratio: 4 / 5; max-width: 100%; border: 1px dashed var(--line); border-radius: var(--radius);
+    background: var(--soft); display: grid; place-items: center; text-align: center; padding: 16px;
+  }
+
+  /* PROJECT INDEX */
+  .proj-index { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin-bottom: 44px; }
+  .proj-index a {
+    display: block; text-decoration: none; color: inherit; background: var(--surface);
+    border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px;
+  }
+  .proj-index a:hover { border-color: var(--accent); }
+  .proj-index strong { display: block; font-family: var(--font-display); font-size: 15px; margin-top: 6px; }
+  .proj-index em { font-style: normal; color: var(--muted); font-size: 14px; }
+
+  /* PROJECT ENTRY */
+  .project { padding-top: 40px; }
+  .project + .project { border-top: 1px solid var(--line); }
+  .project > h3 { font-size: clamp(21px, 2.8vw, 26px); margin-top: 8px; }
+  .project .tagline { color: var(--muted); max-width: var(--measure); margin-top: 10px; }
+  .media {
+    margin: 26px 0; aspect-ratio: 16 / 7; max-width: 100%; border: 1px dashed var(--line);
+    border-radius: var(--radius); background: var(--soft); display: grid; place-items: center;
+    text-align: center; padding: 20px;
+  }
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; margin: 22px 0 6px; padding: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+  .facts div p { font-family: var(--font-display); font-size: 14px; margin-top: 4px; }
+  .imrd { display: grid; gap: 22px; margin-top: 26px; }
+  .imrd h4 { font-size: 15px; letter-spacing: .01em; }
+  .imrd h4 + p { margin-top: 6px; max-width: var(--measure); }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+  .tags span { font-family: var(--font-mono); font-size: 11px; padding: 3px 8px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); }
+
+  /* SKILLS */
+  .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+  .skills section, .skills .col { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; }
+  .skills h3 { font-size: 15px; margin-bottom: 10px; }
+  .skills ul { margin: 0; padding-left: 18px; font-size: 15px; }
+  .skills li { margin-bottom: 4px; }
+
+  /* RESUME */
+  .resume-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
+  .resume-frame { aspect-ratio: 8.5 / 11; border: 1px dashed var(--line); background: var(--soft); border-radius: var(--radius); display: grid; place-items: center; text-align: center; padding: 20px; }
+
+  /* CONTACT */
+  .contact-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; margin-top: 20px; }
+  .contact-list a { font-family: var(--font-display); font-size: 15px; }
+
+  footer.site { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var(--muted); font-size: 14px; }
+
+  /* TODO 提示块 —— 定稿前全部删掉 */
+  .todo {
+    font-family: var(--font-display); font-size: 13.5px; line-height: 1.55;
+    color: var(--warn); background: var(--warn-soft); border-left: 2px solid var(--warn);
+    padding: 10px 14px; border-radius: 0 var(--radius) var(--radius) 0; margin-top: 10px; max-width: var(--measure);
+  }
+  .todo b { font-weight: 600; }
+  .ph { color: var(--muted); }
+
+  @media (max-width: 760px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .portrait { max-width: 200px; }
+    .resume-grid { grid-template-columns: 1fr; }
+    section { padding-block: 48px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+  html { scroll-behavior: smooth; }
+</style>
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site">
+  <div class="wrap">
+    <div class="bar">
+      <a class="wordmark" href="#top">Haozheng (Benny) Zhu <span>· Robotics</span></a>
+      <nav class="main" aria-label="Main">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#resume">Résumé</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+    <div class="styler" role="group" aria-label="Draft style picker">
+      <span class="label">草稿风格</span>
+      <button type="button" data-set="plex" aria-pressed="true">A · Plex</button>
+      <button type="button" data-set="lab" aria-pressed="false">B · Lab</button>
+      <button type="button" data-set="warm" aria-pressed="false">C · Warm</button>
+      <span class="label" style="margin-left:auto">定稿前删掉这一条</span>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div id="top"></div>
+
+  <!-- ============================ HERO ============================ -->
+  <section class="hero">
+    <div class="wrap">
+      <p class="label">MS Mechanical Engineering (Research) · Carnegie Mellon University</p>
+      <h1>Haozheng “Benny” Zhu</h1>
+      <p class="lede">
+        I build motion planning and learning pipelines that let robot arms work in contact —
+        assembling parts, pushing objects, and recovering when the plan meets the real world.
+      </p>
+      <div class="hero-meta">
+        <span class="label">Search-Based Planning Lab · Advisor: Prof. Maxim Likhachev</span>
+        <span class="label">Pittsburgh, PA</span>
+        <span class="label">Seeking full-time robotics algorithm roles, 2026</span>
+      </div>
+      <div class="cta-row">
+        <a class="btn" href="#projects">See the work</a>
+        <a class="btn ghost" href="#resume">One-page résumé</a>
+      </div>
+      <div class="todo">
+        <b>TODO：</b>这段 lede 是你的「电梯陈述」——一句话说清你能做什么、对谁有用。
+        建议改写成针对目标雇主（机器人本体 / 物流仓储 / 工业自动化）的语言，避免只写技术名词。
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ ABOUT ============================ -->
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">01</span>
+        <h2>About me</h2>
+      </div>
+      <div class="about-grid">
+        <div class="portrait"><span class="label">Portrait<br>photo placeholder<br>(4:5)</span></div>
+        <div class="body">
+          <p class="ph">
+            [Opening paragraph — who you are and what you work on. Name the field in plain words before
+            the jargon: “I work on how robot arms plan motions when they have to touch things.”]
+          </p>
+          <p class="ph">
+            [Second paragraph — the path that got you here: soft robotics at SJTU, an exchange year at CMU,
+            now an MS in the Search-Based Planning Lab. Two or three sentences, no résumé bullet dump.]
+          </p>
+          <p class="ph">
+            [Third paragraph — why it matters and what you want next: the kind of team and problem you are
+            looking for, and what you bring to it.]
+          </p>
+          <div class="todo">
+            <b>TODO：</b>作业要求里的 <b>known/new contract</b>（先说读者已知的，再引出新信息）和
+            <b>social value</b>（你的工作对人 / 社会的价值）最好在这一段就落地——例如“装配线上重复、伤手腕的工序”。
+            控制在 150–200 词，三段以内。
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ PROJECTS ============================ -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">02</span>
+        <h2>Projects</h2>
+        <span class="label" style="margin-left:auto">Five entries · four required</span>
+      </div>
+
+      <div class="proj-index">
+        <a href="#p1"><span class="label">Competition · 2026</span><strong>Dual-Arm Industrial Assembly</strong><em>RoCo Challenge, IROS 2026</em></a>
+        <a href="#p2"><span class="label">Research · CMU SBPL</span><strong>Experience-Guided Contact-Rich Planning</strong><em>TMEG</em></a>
+        <a href="#p3"><span class="label">Course project · 2025</span><strong>Proprioceptive Navigation in Vegetation</strong><em>ROS 2 · Husky · D* Lite</em></a>
+        <a href="#p4"><span class="label">Internship · 2024</span><strong>Bin-Picking for Ship Components</strong><em>SJTU–Fraunhofer IMIC</em></a>
+        <a href="#p5"><span class="label">Additional</span><strong>Soft Pneumatic Actuators</strong><em>SJTU Robotics Institute</em></a>
+      </div>
+
+      <!-- ---------- PROJECT 1 ---------- -->
+      <article class="project" id="p1">
+        <p class="label">Project 01 · Team of [N] · Jan 2026 – present</p>
+        <h3>Dual-Arm Industrial Assembly for the RoCo Challenge</h3>
+        <p class="tagline ph">[One sentence a recruiter can repeat: what the robot does, and how well it does it.]</p>
+
+        <div class="media"><span class="label">Media placeholder — rollout GIF or sim screenshot<br>(16:7, &lt; 3 MB, with a caption)</span></div>
+
+        <div class="facts">
+          <div><span class="label">My role</span><p class="ph">[e.g. policy training &amp; evaluation]</p></div>
+          <div><span class="label">Team</span><p class="ph">[N people, your slice]</p></div>
+          <div><span class="label">Tools</span><p>Isaac Sim 5.1 · PyTorch · LeRobot</p></div>
+          <div><span class="label">Status</span><p class="ph">[submitted / in progress]</p></div>
+        </div>
+
+        <div class="imrd">
+          <div>
+            <h4>The problem</h4>
+            <p class="ph">[What industrial task board assembly is, and why gears, connectors and snap-fits are
+            hard for robots: tight tolerances, contact, no clean visual feedback at the moment of insertion.]</p>
+          </div>
+          <div>
+            <h4>Approach</h4>
+            <p class="ph">[The pipeline in reader-first order: dataset collection → part-grouped policies
+            (vision-based diffusion policy, ACT, pi0.5) → residual RL on the hardest snap-fit → unified evaluation.
+            One diagram here would do more than a paragraph.]</p>
+          </div>
+          <div>
+            <h4>My contribution</h4>
+            <p class="ph">[Be explicit and first-person: what you designed, debugged, trained, and decided.
+            Name the bugs you found and the calls you made — the rotation-convention mismatch, the curriculum design.]</p>
+          </div>
+          <div>
+            <h4>Results and what it is worth</h4>
+            <p class="ph">[Numbers: success rate per part group, cycle time, how many demos it took.
+            Then the social value: assembly work that is repetitive and injury-prone for people.]</p>
+          </div>
+        </div>
+        <div class="tags"><span>Imitation learning</span><span>Diffusion policy</span><span>ACT</span><span>Residual RL</span><span>Isaac Sim</span></div>
+        <div class="todo"><b>TODO：</b>这是你最强的一个项目，建议放第一位并配一张 pipeline 图 + 一段 rollout 视频。
+        指标没出全也先写占位数字格式（如 “__ / 9 parts, __% success over __ trials”），提醒自己回填。</div>
+      </article>
+
+      <!-- ---------- PROJECT 2 ---------- -->
+      <article class="project" id="p2">
+        <p class="label">Project 02 · Research · CMU Search-Based Planning Lab</p>
+        <h3>Experience-Guided Planning for Contact-Rich Manipulation</h3>
+        <p class="tagline ph">[One sentence: reusing past motions so a planner does not solve the same hard problem twice.]</p>
+
+        <div class="media"><span class="label">Media placeholder — planner visualization / PushT rollout</span></div>
+
+        <div class="facts">
+          <div><span class="label">My role</span><p class="ph">[research assistant — planner design &amp; experiments]</p></div>
+          <div><span class="label">Advisor</span><p>Prof. Maxim Likhachev</p></div>
+          <div><span class="label">Tools</span><p>ManiSkill · C++/Python · OMPL-style RRT</p></div>
+          <div><span class="label">Status</span><p class="ph">[ongoing / paper in prep]</p></div>
+        </div>
+
+        <div class="imrd">
+          <div><h4>The problem</h4><p class="ph">[Why sampling-based planners struggle once the robot must push, slide or
+          maintain contact — the state space is no longer just the arm.]</p></div>
+          <div><h4>Approach</h4><p class="ph">[Experience graphs / learned forward models; the PushT benchmark;
+          the comparison against an A* baseline on the end effector.]</p></div>
+          <div><h4>My contribution</h4><p class="ph">[The RRT planner you built, the forward-model evaluation protocol
+          (horizon-16 SE(2) rollout error), what you measured and why.]</p></div>
+          <div><h4>Results and what it is worth</h4><p class="ph">[Planning time, success rate, error in mm/deg.
+          Value: robots that can be re-tasked in a day instead of re-engineered for weeks.]</p></div>
+        </div>
+        <div class="tags"><span>Motion planning</span><span>RRT</span><span>Experience graphs</span><span>ManiSkill</span></div>
+      </article>
+
+      <!-- ---------- PROJECT 3 ---------- -->
+      <article class="project" id="p3">
+        <p class="label">Project 03 · Course project · Mar – May 2025</p>
+        <h3>Proprioceptive Navigation Through Vegetation</h3>
+        <p class="tagline ph">[One sentence: a ground robot that learns which tall grass it can drive through.]</p>
+
+        <div class="media"><span class="label">Media placeholder — Gazebo scene / costmap before &amp; after</span></div>
+
+        <div class="facts">
+          <div><span class="label">My role</span><p class="ph">[your slice of a team of N]</p></div>
+          <div><span class="label">Course</span><p class="ph">[course number]</p></div>
+          <div><span class="label">Tools</span><p>ROS 2 · Gazebo · Husky · Nav2</p></div>
+          <div><span class="label">Status</span><p>Completed</p></div>
+        </div>
+
+        <div class="imrd">
+          <div><h4>The problem</h4><p class="ph">[Lidar sees grass as a wall; the robot stops for obstacles that are not obstacles.]</p></div>
+          <div><h4>Approach</h4><p class="ph">[D* Lite over a custom Nav2 costmap, with a contact model that updates
+          traversability from what the robot feels as it drives.]</p></div>
+          <div><h4>My contribution</h4><p class="ph">[Which module was yours; what you tuned and validated.]</p></div>
+          <div><h4>Results and what it is worth</h4><p class="ph">[Path length / replan count / success across N trials.
+          Value: search-and-rescue and agricultural robots that stop giving up on passable terrain.]</p></div>
+        </div>
+        <div class="tags"><span>ROS 2</span><span>D* Lite</span><span>Costmaps</span><span>Bayesian update</span></div>
+      </article>
+
+      <!-- ---------- PROJECT 4 ---------- -->
+      <article class="project" id="p4">
+        <p class="label">Project 04 · Internship · Summer 2024</p>
+        <h3>Bin-Picking for Ship Components</h3>
+        <p class="tagline">A deployed bin-picking cell that grasped nine part types out of unsorted bins at roughly an 85% success rate.</p>
+
+        <div class="media"><span class="label">Media placeholder — cell photo or grasp sequence<br>（注意：拍照/截图前确认公司是否允许外传）</span></div>
+
+        <div class="facts">
+          <div><span class="label">My role</span><p class="ph">[intern — perception setup &amp; calibration]</p></div>
+          <div><span class="label">Host</span><p>SJTU–Fraunhofer Intelligent Manufacturing Innovation Center</p></div>
+          <div><span class="label">Tools</span><p class="ph">[3D camera model] · [robot arm] · CAD</p></div>
+          <div><span class="label">Outcome</span><p>~85% grasp success</p></div>
+        </div>
+
+        <div class="imrd">
+          <div><h4>The problem</h4><p class="ph">[Ship parts arrive unsorted in bins; a person picks and orients them all day.]</p></div>
+          <div><h4>Approach</h4><p class="ph">[CAD models of nine part types → 3D camera install → hand–eye calibration → grasp planning.]</p></div>
+          <div><h4>My contribution</h4><p class="ph">[What you personally built and measured.]</p></div>
+          <div><h4>Results and what it is worth</h4><p class="ph">[85% over how many picks? What broke the other 15%?
+          Value: taking a repetitive lifting job off a person's shoulders.]</p></div>
+        </div>
+        <div class="tags"><span>Hand–eye calibration</span><span>3D vision</span><span>Grasp planning</span><span>Deployment</span></div>
+      </article>
+
+      <!-- ---------- PROJECT 5 ---------- -->
+      <article class="project" id="p5">
+        <p class="label">Project 05 · Additional material · SJTU Robotics Institute</p>
+        <h3>Soft Pneumatic Actuators and Dielectric Elastomers</h3>
+        <p class="tagline ph">[One sentence: undergraduate research on robots made of rubber instead of rigid links.]</p>
+        <div class="media"><span class="label">Media placeholder — actuator bending / test rig</span></div>
+        <div class="imrd">
+          <div><h4>What it was</h4><p class="ph">[Short version — fabrication, modeling, testing. Advisor: Prof. Chen Feifei.]</p></div>
+          <div><h4>Why it is here</h4><p class="ph">[What it proves about you: hands-on fabrication and a tolerance for
+          messy, non-ideal hardware — useful evidence for a planning engineer.]</p></div>
+        </div>
+        <div class="tags"><span>Soft robotics</span><span>Fabrication</span><span>Modeling</span></div>
+        <div class="todo"><b>TODO：</b>作业说额外内容会被点评但不计入评分，所以这一块保持简短。
+        还有两个可选条目可以顶替它：Shadow Hand 手内重定向 (PPO/SAC/GenPO) 和 多旋翼避障最优控制 (24-785)。</div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============================ SKILLS ============================ -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">03</span>
+        <h2>Skills at a glance</h2>
+        <span class="label" style="margin-left:auto">For recruiters scanning in 20 seconds</span>
+      </div>
+      <div class="skills">
+        <div class="col">
+          <h3>Planning &amp; control</h3>
+          <ul>
+            <li>Sampling-based planning (RRT, KPIECE)</li>
+            <li>Search-based &amp; experience-based planning (A*, D* Lite, E-graphs)</li>
+            <li>Trajectory optimization, collocation methods</li>
+            <li class="ph">[add / trim to match the job posting]</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h3>Robot learning</h3>
+          <ul>
+            <li>Imitation learning: ACT, diffusion policy, flow matching</li>
+            <li>Reinforcement learning: PPO, SAC, residual policies</li>
+            <li>Dataset building and policy evaluation</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h3>Systems &amp; hardware</h3>
+          <ul>
+            <li>ROS / ROS 2, Nav2, Gazebo</li>
+            <li>Isaac Sim / Isaac Lab, MuJoCo, ManiSkill</li>
+            <li>UR10e, PR2, Husky; 3D cameras and hand–eye calibration</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h3>Engineering practice</h3>
+          <ul>
+            <li>Python, C++, PyTorch</li>
+            <li>Git-based collaboration across lab machines</li>
+            <li>Technical writing in English and Chinese</li>
+          </ul>
+        </div>
+      </div>
+      <div class="todo"><b>TODO：</b>作业要求「让雇主一眼找到他们要的技能」。
+      建议把目标岗位 JD 里的关键词逐条比对，确保出现在这一屏；顺序按你最想被雇的岗位排。</div>
+    </div>
+  </section>
+
+  <!-- ============================ RESUME ============================ -->
+  <section id="resume">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">04</span>
+        <h2>Résumé</h2>
+      </div>
+      <div class="resume-grid">
+        <div class="resume-frame"><span class="label">One-page résumé preview<br>(embed the PDF here, US Letter)</span></div>
+        <div>
+          <p class="ph">[A short orientation line: what the résumé covers, and the version on this page —
+          planning and controls. Say when it was last updated.]</p>
+          <div class="cta-row">
+            <a class="btn" href="#resume">Download PDF</a>
+            <a class="btn ghost" href="#contact">Ask for the other version</a>
+          </div>
+          <div class="todo">
+            <b>TODO：</b>课程要的是英文一页简历，你现在的是中文 docx 版本，需要重排一版英文 Letter 尺寸的。
+            页面上放 PDF（浏览器直接预览、不会乱版），同时挂一个下载链接。两个版本（规控 / 学习）建议线上只放一版，另一版按需发。
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ CONTACT ============================ -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">05</span>
+        <h2>Get in touch</h2>
+      </div>
+      <p class="ph" style="max-width:var(--measure)">[One line inviting contact — say what you would like to hear about.]</p>
+      <div class="contact-list">
+        <div><span class="label">Email</span><p><a href="mailto:haozhenz@andrew.cmu.edu">haozhenz@andrew.cmu.edu</a></p></div>
+        <div><span class="label">GitHub</span><p><a href="https://github.com/Benny-Zhu-398" rel="noopener">github.com/Benny-Zhu-398</a></p></div>
+        <div><span class="label">LinkedIn</span><p class="ph">[add your profile URL]</p></div>
+        <div><span class="label">Google Scholar</span><p class="ph">[optional — you have a 2023 co-authored review]</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>© 2026 Haozheng Zhu · Built for [course number], Carnegie Mellon University · Last updated <span class="ph">[date]</span></p>
+  </div>
+</footer>
+
+<script>
+  // ---- 草稿风格切换（定稿前连同 .styler 一起删掉）----
+  (function () {
+    var root = document.documentElement;
+    var btns = Array.prototype.slice.call(document.querySelectorAll('.styler button'));
+    function apply(name) {
+      if (name === 'plex') { root.removeAttribute('data-style'); }
+      else { root.setAttribute('data-style', name); }
+      btns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.set === name)); });
+      try { localStorage.setItem('draft-style', name); } catch (e) {}
+    }
+    btns.forEach(function (b) { b.addEventListener('click', function () { apply(b.dataset.set); }); });
+    try {
+      var saved = localStorage.getItem('draft-style');
+      if (saved) { apply(saved); }
+    } catch (e) {}
+  })();
+
+  // ---- 导航高亮：当前滚动到的区块 ----
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.main a'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var targets = Object.keys(map).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+    if (!('IntersectionObserver' in window) || !targets.length) { return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          links.forEach(function (a) { a.removeAttribute('aria-current'); });
+          map[en.target.id].setAttribute('aria-current', 'true');
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    targets.forEach(function (t) { io.observe(t); });
+  })();
+</script>
+
+</body>
+</html>

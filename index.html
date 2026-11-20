@@ -21,8 +21,6 @@
     --accent:  #0d5db8;
     --accent-hover: #4a85c8;
     --soft:    #f3f4f5;
-    --warn:       #8a6d1b;
-    --warn-soft:  #f7eec5;
 
     --font: "Raleway", "Helvetica Neue", Arial, sans-serif;
 
@@ -42,8 +40,6 @@
       --accent:  #6fb3e0;
       --accent-hover: #8fc4ea;
       --soft:    #1b1e21;
-      --warn:       #caa24c;
-      --warn-soft:  rgba(202, 162, 76, .14);
     }
   }
   :root[data-theme="dark"] {
@@ -55,8 +51,6 @@
     --accent:  #6fb3e0;
     --accent-hover: #8fc4ea;
     --soft:    #1b1e21;
-    --warn:       #caa24c;
-    --warn-soft:  rgba(202, 162, 76, .14);
   }
 
   /* ============================================================
@@ -88,14 +82,8 @@
 
   .divider { border-top: 1px solid var(--line); }
 
-  /* placeholder / instructional text */
+  /* placeholder text (content not yet supplied) */
   .ph { color: var(--muted); font-style: italic; }
-  .todo {
-    font-size: 13.5px; line-height: 1.6; color: var(--warn); background: var(--warn-soft);
-    padding: 10px 14px; border-radius: 0 var(--radius) var(--radius) 0; border-left: 2px solid var(--warn);
-    margin-top: 12px; max-width: var(--measure);
-  }
-  .todo b { font-weight: 700; }
 
   /* ============================================================
      HEADER / NAV
@@ -135,10 +123,6 @@
     background: var(--soft); display: block; overflow: hidden;
   }
   .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 58% 32%; display: block; }
-  .portrait.ph {
-    border: 1px dashed var(--line); display: grid; place-items: center; text-align: center; padding: 14px;
-    color: var(--muted); font-size: 13px; font-style: italic;
-  }
   .profile-links { margin-top: 14px; font-size: 15px; }
   .profile-links a { font-weight: 600; }
   .profile-links .sep { color: var(--muted); margin: 0 6px; }
@@ -156,24 +140,24 @@
   .proj-index li { margin-bottom: 6px; font-size: 15px; }
   .proj-index i { color: var(--muted); font-style: italic; }
 
-  .project { padding-top: 36px; }
+  .project { padding-block: 20px; }
   .project + .project { border-top: 1px solid var(--line); }
 
-  .proj-head { display: flex; gap: 24px; align-items: flex-start; }
+  .proj-head { display: flex; gap: 24px; align-items: center; }
   .thumb {
-    flex: 0 0 240px; aspect-ratio: 16 / 9; border: 1px dashed var(--line); border-radius: var(--radius);
-    background: var(--soft); display: grid; place-items: center; text-align: center; padding: 14px;
+    flex: 0 0 240px; aspect-ratio: 16 / 9; border-radius: var(--radius);
+    background: var(--soft); overflow: hidden; display: block;
+  }
+  .thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .thumb.ph {
+    border: 1px dashed var(--line); display: grid; place-items: center; text-align: center; padding: 14px;
     color: var(--muted); font-size: 12.5px; font-style: italic;
   }
   .proj-text { flex: 1 1 auto; min-width: 0; }
-  .proj-title { font-size: 20px; font-weight: 700; color: var(--ink); display: inline-block; }
+  .proj-title { font-size: 19px; font-weight: 700; color: var(--ink); display: inline-block; }
   .proj-title:hover { border-bottom: 1px solid var(--accent-hover); }
-  .meta { color: var(--muted); font-style: italic; font-size: 14px; margin-top: 6px; }
+  .meta { color: var(--muted); font-style: italic; font-size: 14px; margin-top: 4px; }
   .tagline { margin-top: 8px; max-width: var(--measure); }
-
-  .proj-body { margin-top: 20px; max-width: var(--measure); }
-  .proj-body h4 { font-size: 15px; margin-top: 18px; }
-  .proj-body h4 + p { margin-top: 6px; }
 
   /* ============================================================
      SKILLS
@@ -182,17 +166,6 @@
   .skills h3 { font-size: 16px; margin-bottom: 10px; }
   .skills ul { margin: 0; padding-left: 18px; font-size: 15px; }
   .skills li { margin-bottom: 5px; }
-
-  /* ============================================================
-     RESUME
-     ============================================================ */
-  .resume-grid { display: grid; grid-template-columns: 300px 1fr; gap: 32px; align-items: start; }
-  .resume-frame {
-    aspect-ratio: 8.5 / 11; border: 1px dashed var(--line); background: var(--soft); border-radius: var(--radius);
-    display: grid; place-items: center; text-align: center; padding: 18px; color: var(--muted); font-size: 13px; font-style: italic;
-  }
-  .resume-links { margin-top: 18px; font-size: 15px; }
-  .resume-links .sep { color: var(--muted); margin: 0 6px; }
 
   /* ============================================================
      CONTACT
@@ -206,9 +179,8 @@
   @media (max-width: 760px) {
     .profile-row { flex-direction: column; }
     .profile-photo { flex: none; }
-    .proj-head { flex-direction: column; }
+    .proj-head { flex-direction: column; align-items: stretch; }
     .thumb { flex: none; width: 100%; }
-    .resume-grid { grid-template-columns: 1fr; }
     section { padding-block: 32px; }
   }
   @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
@@ -227,7 +199,6 @@
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
         <a href="#skills">Skills</a>
-        <a href="#resume">Résumé</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
@@ -243,7 +214,6 @@
       <div class="profile-photo">
         <div class="portrait"><img src="images/profile.jpg" alt="Haozheng (Benny) Zhu"></div>
         <p class="profile-links">
-          <a href="#resume">Résumé</a><span class="sep">/</span>
           <a href="https://github.com/Benny-Zhu-398" rel="noopener">GitHub</a><span class="sep">/</span>
           <a href="#contact" class="ph">LinkedIn</a><span class="sep">/</span>
           <a href="#contact" class="ph">Google Scholar</a>
@@ -269,14 +239,6 @@
             [Third paragraph — why it matters and what you want next: the kind of team and problem you are
             looking for, and what you bring to it.]
           </p>
-          <div class="todo">
-            <b>TODO:</b> Rewrite the first line as the elevator pitch — one sentence on what you can do and
-            who it is useful to, in the language of the employers you are targeting (robot manufacturers,
-            warehouse automation, industrial automation) rather than in method names alone. Then work in the
-            <b>known/new contract</b> (open each sentence with what the reader already knows, then add the new
-            information) and the <b>social value</b> of the work — for example, the repetitive assembly-line
-            motions that wear out people's wrists. Keep the three paragraphs to 150–200 words total.
-          </div>
         </div>
       </div>
     </div>
@@ -293,7 +255,7 @@
       <ul class="proj-index">
         <li><a href="#p-esim">Experience-Guided Planning for Contact-Rich Manipulation</a> <i>— CMU Search-Based Planning Lab</i></li>
         <li><a href="#p-roco">Dual-Arm Industrial Assembly for the RoCo Challenge</a> <i>— RoCo Challenge, IROS 2026</i></li>
-        <li><a href="#p-flow">Flow Matching for Legged Locomotion</a> <i>— materials pending</i></li>
+        <li><a href="#p-flow">Flow Matching for Locomotion</a> <i>— 24-782</i></li>
         <li><a href="#p-shadow">Dexterous In-Hand Manipulation with Shadow Hand</a> <i>— with Xinxuan Tang</i></li>
         <li><a href="#p-drone">Optimal Control of Quadrotor for Obstacle Avoidance</a> <i>— 24-785</i></li>
         <li><a href="#p-veg">Proprioceptive Navigation Through Vegetation</a> <i>— 16-350</i></li>
@@ -303,314 +265,84 @@
       <!-- ---------- E-SIM-MJ ---------- -->
       <article class="project" id="p-esim">
         <div class="proj-head">
-          <div class="thumb">Media placeholder — search-graph growth GIF or PushT rollout</div>
+          <div class="thumb"><img src="images/thumb-esim.jpg" alt="Planned vs. executed end-effector and object trajectories in e-sim-mj"></div>
           <div class="proj-text">
             <a class="proj-title" href="https://github.com/devanshroyal-7/e-sim-mj" rel="noopener">Experience-Guided Planning for Contact-Rich Manipulation</a>
             <p class="meta">Research · CMU Search-Based Planning Lab · Advisor: Prof. Maxim Likhachev</p>
-            <p class="tagline">A MuJoCo-native planner that searches directly over physics rollouts to push a block to a goal pose, and reuses a library of previously solved pushes to cut search cost on related problems.</p>
+            <p class="tagline">A MuJoCo-native planner that searches over physics rollouts and reuses a library of past pushes to cut search cost on related problems — contact-frame-aware replay raises execution success from 2% to 90%.</p>
           </div>
-        </div>
-
-        <div class="proj-body">
-          <h4>The problem</h4>
-          <p>Sampling- and search-based planners that treat a contact-rich push as a kinematic search have to
-          resolve every contact interaction from scratch, even when a very similar push has already been solved
-          before. The goal is a planner that can recognize and reuse a past solution instead of re-deriving it.</p>
-
-          <h4>Approach</h4>
-          <p>Every search node stores a full MuJoCo snapshot (<code>mj_getState</code>/<code>mj_setState</code> on
-          <code>mjSTATE_INTEGRATION</code>, including <code>qacc_warmstart</code>), so restoring a branch recomputes
-          the exact same contacts as an uninterrupted rollout — verified to ~1e-12 by a dedicated restore-invariance
-          test. A weighted A* (<code>f = g + w·h</code>) expands eight end-effector-delta primitives per node,
-          scored by remaining pose error plus end-effector reach; success is silhouette coverage of the goal shape,
-          not a pose threshold. Experience A* additionally lets any expanded node attach a stored push from a
-          library of past solves, warped onto the current object pose by an SE(2) transform and screened
-          analytically before it is ever simulated. An RRT baseline (goal-biased sampling, nearest-node expansion)
-          is implemented for comparison. Everything runs on both a 2D puck and a 3D KUKA iiwa14 PushT task,
-          evaluated with reproducible seeded sweeps.</p>
-
-          <h4>My contribution</h4>
-          <p>Designed and implemented the capture/restore snapshot architecture and the weighted A* / experience-A*
-          planners built on it, the SE(2) experience-warping and lazy-attachment screening, and the ablation studies
-          comparing plain A*, RRT, and experience A* under matched search budgets.</p>
-
-          <h4>Results and what it is worth</h4>
-          <p>On a 20-seed sweep at matched search weight, attaching a 100-push library cut mean expansions from 603
-          to 547 (about 9%) at the same 90% success rate; isolating a single favorable seed, reuse took it from
-          1,311 expansions (84 s) down to 180 (13 s). The harder finding was about execution, not search: naively
-          replaying a stored push's joint trajectory after repositioning the arm succeeded on only 2 of 100 held-out
-          seeds, because sub-millimeter contact offsets compound within a few pushes. Restoring the arm into the
-          object's own contact frame — matching end-effector pose, contact points/normals, and posture, rather than
-          raw joint angles — raised execution success to 9 of 10 on a follow-up study, at fewer expansions and less
-          planning time than plain A*. The reuse benefit is real, but it is gated by how faithfully the stored
-          contact state is restored, not just by having the trajectory on hand.</p>
         </div>
       </article>
 
       <!-- ---------- RoCo DUAL-ARM ---------- -->
       <article class="project" id="p-roco">
         <div class="proj-head">
-          <div class="thumb">Media placeholder — rollout GIF or Isaac Sim screenshot (16:9)</div>
+          <div class="thumb ph">Media placeholder — rollout GIF or Isaac Sim screenshot</div>
           <div class="proj-text">
             <a class="proj-title" href="https://github.com/Benny-Zhu-398/RoCo_Assembly" rel="noopener">Dual-Arm Industrial Assembly for the RoCo Challenge</a>
-            <p class="meta">Team entry · Industrial Task Board Assembly track, 2nd RoCo Challenge @ IROS 2026 · Jan 2026 – present</p>
-            <p class="tagline">A bimanual manipulation pipeline that picks nine industrial parts — gears, connectors, a pin, a rod, batteries — and assembles them onto a task board in Isaac Sim, scored part-by-part against the official evaluation harness.</p>
+            <p class="meta">Team entry · Industrial Task Board Assembly track, 2nd RoCo Challenge @ IROS 2026 · in progress</p>
+            <p class="tagline">A bimanual pipeline that picks nine industrial parts and assembles them onto a task board in Isaac Sim, trained via disturbance-augmented imitation learning per part group.</p>
           </div>
-        </div>
-
-        <div class="proj-body">
-          <h4>The problem</h4>
-          <p>The task board mixes two different placement problems: tight-tolerance &ldquo;snap&rdquo; connections
-          (USB/HDMI connectors, a pin, a rod) where millimeter-scale placement error matters, and looser
-          &ldquo;drop&rdquo; placements (gears onto a rack post, batteries into a cradle) that should settle into a
-          repeatable pose under gravity — all driven from a single-arm pick-and-place harness that scores each part
-          pass/fail independently.</p>
-
-          <h4>Approach</h4>
-          <p>The harness (Isaac Sim 5.1, a bimanual gripper with head and dual wrist cameras) hands each part to a
-          policy implementing a shared API; snap parts are confirmed by a proximity-triggered joint once the
-          gripper lands the part within tolerance, drop parts are graded by their settled pose. A scripted
-          waypoint-following baseline establishes a reference. Learned policies run as a sidecar process, since
-          Isaac Sim can't share its pinned Python environment with training stacks — adapters exist for LeRobot
-          Diffusion Policy and pi0.5, plus a project-specific vision-conditioned diffusion policy trained per
-          part group. Demonstrations are collected through a LeRobot-format pipeline with injected pose
-          disturbances during collection, so the trained policy sees off-nominal starts rather than only clean
-          scripted rollouts.</p>
-
-          <h4>My contribution</h4>
-          <p>Trained and iterated the vision-based diffusion policy for the battery-placement part group
-          (<code>battery_size1</code>/<code>battery_size5</code>), tuning it against the disturbance-augmented
-          dataset.</p>
-
-          <h4>Results and what it is worth</h4>
-          <p class="ph">[TODO: evaluation is still in progress ahead of the IROS 2026 submission — fill in
-          per-part-group success rate and cycle time once the harness run is final.]</p>
         </div>
       </article>
 
       <!-- ---------- FLOW MATCHING ---------- -->
       <article class="project" id="p-flow">
         <div class="proj-head">
-          <div class="thumb">Media placeholder — Walker2d rollout GIF across target speeds</div>
+          <div class="thumb"><img src="images/thumb-flow.jpg" alt="Walker2d biped in MuJoCo"></div>
           <div class="proj-text">
             <a class="proj-title" href="#p-flow">Flow Matching for Locomotion</a>
-            <p class="meta">24-782 · Team Stitch, with Gopalakrishnan Thirunellai Venkitachalam · Fall 2025</p>
-            <p class="tagline">A two-stage pipeline — a symmetry-regularized PPO expert feeding a Transformer-based Flow Matching model — that produces stable, velocity-conditioned bipedal locomotion and generalizes continuously across walking speeds the expert was never trained at.</p>
+            <p class="meta">24-782 · Team Stitch, with Gopalakrishnan Thirunellai Venkitachalam</p>
+            <p class="tagline">A symmetry-regularized PPO expert feeds a Transformer Flow Matching model that generalizes continuously from 0.5&ndash;3.0 m/s, cutting gait asymmetry 83% versus plain PPO.</p>
           </div>
-        </div>
-
-        <div class="proj-body">
-          <h4>The problem</h4>
-          <p>Standard reward-driven RL policies for legged locomotion default to a unimodal Gaussian action
-          distribution, which struggles to represent the multimodal structure of natural gaits and tends to
-          collapse into asymmetric, lopsided walking — especially at higher target speeds. Separately, an RL expert
-          trained at a handful of discrete target velocities has no way to interpolate smoothly to a velocity it
-          was never trained on.</p>
-
-          <h4>Approach</h4>
-          <p>Stage one trains a symmetry-aware PPO expert on the MuJoCo Walker2d biped. Starting from the default
-          reward, we add a Gaussian velocity-tracking term and a freezing penalty (to stop the agent from
-          dragging one leg), then compare three ways of enforcing bilateral symmetry: a plain reward-shaped policy,
-          an auxiliary &ldquo;Mirrored-PPO&rdquo; loss that penalizes the policy's output disagreeing with its own
-          mirrored-state output, and a <em>phase-based mirroring</em> scheme that tracks a gait-cycle phase variable
-          and literally swaps left/right observations and actions once the agent crosses the half-cycle — training
-          one policy to implicitly serve both legs. The expert is curriculum-trained from 0.5 m/s up to 3.5 m/s.
-          Stage two collects a tiered, quality-filtered dataset from expert rollouts (episodes under 900 steps or
-          near-fall frames are dropped; each trajectory is labeled by its <em>measured</em> average velocity rather
-          than its commanded target, since the two diverge at higher speeds), and trains a Transformer to predict
-          16-step action chunks via optimal-transport Flow Matching — a deterministic alternative to diffusion that
-          learns a velocity field along (nearly) straight-line paths between noise and data, which lets the ODE
-          solver take much larger integration steps at inference. Online, predictions from overlapping chunks are
-          combined with exponentially-weighted temporal ensembling to suppress jitter.</p>
-
-          <h4>My contribution</h4>
-          <p class="ph">[Paper lists two co-authors without a stated split — note which half was specifically
-          yours: the PPO/phase-mirroring expert side, or the Flow Matching/Transformer/data-pipeline side.]</p>
-
-          <h4>Results and what it is worth</h4>
-          <p>Phase-based mirroring is the clear winner for symmetry: it cuts the Overall Symmetric Index by 83% versus
-          a plain reward-shaped PPO (96.3 → 16.0) and by 68% versus the Mirrored-PPO auxiliary-loss baseline (49.6 →
-          16.0), becoming the expert used for all downstream data collection. The resulting Flow Matching policy then
-          generalizes continuously from 0.5 to 3.0 m/s in 0.1 m/s steps — a range the discrete expert was never
-          evaluated at outside its six training speeds — holding success rates above 80% at most velocities (100% at
-          several) and tracking error typically under 0.4 m/s, with one weak region around 1.6&ndash;1.8 m/s where
-          success drops to 20% and tracking error spikes, likely a mode-averaging artifact where the dataset's
-          medium- and high-speed gait strategies overlap and conflict. Its gait symmetry (SI 18&ndash;45) lands
-          between the phase-mirrored expert and the Mirrored-PPO baseline — looser than the expert it was trained
-          on, but still far better than plain PPO. The practical payoff is largely computational: because the
-          optimal-transport flow traces nearly straight paths, the ODE solver needs far fewer function evaluations
-          than a diffusion-based alternative would, which is what makes this fast enough for closed-loop control.</p>
         </div>
       </article>
 
       <!-- ---------- SHADOW HAND ---------- -->
       <article class="project" id="p-shadow">
         <div class="proj-head">
-          <div class="thumb">Media placeholder — cube reorientation rollout</div>
+          <div class="thumb"><img src="images/thumb-shadow.jpg" alt="Grid of simulated Shadow Hands reorienting cubes"></div>
           <div class="proj-text">
             <a class="proj-title" href="#p-shadow">Dexterous In-Hand Manipulation with Shadow Hand</a>
             <p class="meta">With Xinxuan Tang · Mechanical Engineering, CMU</p>
-            <p class="tagline">A systematic comparison of RL paradigms — PPO, SAC, and CEM — on Shadow Hand cube reorientation, plus two modifications (domain randomization, and a diffusion-based on-policy generative policy) aimed at robustness and expressiveness.</p>
+            <p class="tagline">A comparison of PPO, SAC, and CEM on Shadow Hand cube reorientation, plus domain randomization and a diffusion-based GenPO policy — large-scale parallel PPO wins outright, and GenPO matches it with smoother, lower-variance training.</p>
           </div>
-        </div>
-
-        <div class="proj-body">
-          <h4>The problem</h4>
-          <p>Cube reorientation with a 24-DoF Shadow Hand (157-dim observation, 20-dim action) is a high-dimensional,
-          contact-rich control problem. A standard Gaussian policy is also structurally mismatched to it: there are
-          multiple valid finger configurations that achieve the same target orientation, and a unimodal distribution
-          collapses them into one averaged — often brittle — behavior.</p>
-
-          <h4>Approach</h4>
-          <p>On the Isaac-Repose-Cube-Shadow-Direct-v0 environment (dense reward: distance penalty, a rotation term
-          that grows sharply near the goal, action regularization, a sparse success bonus, a fall penalty), we
-          benchmark PPO (32 and 512 parallel environments, to isolate the effect of rollout parallelism), SAC, CEM,
-          and a random baseline on identical settings. On top of that, we evaluate two modifications: (1) domain
-          randomization over object mass, surface friction, joint damping, and observation/action noise at every
-          reset, to fight simulator overfitting; and (2) GenPO, which replaces PPO's Gaussian policy head with an
-          invertible diffusion policy — a doubled dummy-action construction makes the diffusion process invertible,
-          which makes exact log-likelihoods tractable via a change-of-variables formula, so PPO's clipped surrogate
-          objective, entropy regularization, and KL-adaptive learning rate all still apply to a genuinely multimodal
-          policy.</p>
-
-          <h4>My contribution</h4>
-          <p class="ph">[Paper doesn't break the two-person split out explicitly — note which half was yours: the
-          baseline sweep / domain randomization side, or the GenPO diffusion-policy side.]</p>
-
-          <h4>Results and what it is worth</h4>
-          <p>Against a random-baseline mean return of &minus;135.13, PPO dominates SAC and CEM outright, and
-          parallelism matters enormously: PPO with 512 environments reaches both the highest final reward and by
-          far the highest consecutive-success score, while PPO32 plateaus much lower and SAC/CEM stay near zero
-          for most of training &mdash; SAC's replay buffer gets flooded with low-quality early-policy transitions
-          faster than its critic can correct for them, and CEM's sampling-based search doesn't scale to a 20-dim
-          action space without a learned value function. Domain randomization learns slower early on but keeps
-          improving over a much longer horizon, ending at a high, robust consecutive-success score — the expected
-          robustness/sample-efficiency trade-off. GenPO matches or exceeds vanilla PPO's final reward with
-          noticeably smoother, lower-variance learning curves, evidence that the multimodal diffusion policy is
-          genuinely representing more than one viable manipulation strategy rather than collapsing to one.</p>
         </div>
       </article>
 
       <!-- ---------- DRONE / 24-785 ---------- -->
       <article class="project" id="p-drone">
         <div class="proj-head">
-          <div class="thumb">Media placeholder — 3D rendering of optimized vs. reference trajectories</div>
+          <div class="thumb"><img src="images/thumb-drone.jpg" alt="3D rendering of three quadrotor trajectories avoiding two moving obstacles"></div>
           <div class="proj-text">
             <a class="proj-title" href="#p-drone">Optimal Control of Quadrotor for Obstacle Avoidance</a>
             <p class="meta">24-785 · Team 8, with Burhan Shirose, Qihang Shan, Madeline Hoedemaker</p>
-            <p class="tagline">A nonconvex trajectory-optimization pipeline that steers three planar quadrotors past two moving obstacles while tracking a reference trajectory, solved and cross-checked with two different NLP solvers.</p>
+            <p class="tagline">Three planar quadrotors navigate two moving obstacles via nonconvex trajectory optimization, cross-validated with Julia's fmincon and SciPy's SLSQP — fmincon converged 7&times; faster with lower tracking error.</p>
           </div>
-        </div>
-
-        <div class="proj-body">
-          <h4>The problem</h4>
-          <p>Generate dynamically-feasible, collision-free trajectories for three quadrotors navigating two moving
-          obstacles over a 5-second horizon, minimizing trajectory-tracking error and control effort subject to the
-          quadrotor's own dynamics, thrust limits, a minimum inter-robot separation, and a minimum clearance from
-          each obstacle.</p>
-
-          <h4>Approach</h4>
-          <p>Each quadrotor is modeled as a 6-state planar vehicle (position, pitch, their velocities) with 2 thrust
-          inputs; Hermite&ndash;Simpson collocation enforces dynamic feasibility between time steps. The resulting
-          nonconvex NLP is solved two ways &mdash; Julia's <code>fmincon</code> (interior-point) and SciPy's SLSQP
-          (quasi-Newton SQP) &mdash; each from multiple random initial guesses, since the collision-avoidance
-          constraints make the feasible region non-convex and both solvers only find local minima. A sensitivity
-          study then sweeps the cost weights (state-tracking <em>Q</em>, control-effort <em>R</em>, terminal
-          <em>Q<sub>f</sub></em>) and the safety margins (inter-robot distance, obstacle radius) against the
-          baseline, and a Lagrange-multiplier analysis identifies exactly which constraints are actually binding
-          the solution.</p>
-
-          <h4>My contribution</h4>
-          <p>Developed the <code>fmincon</code> pipeline in Julia; wrote the Problem Definition and fmincon slides,
-          and the Project Statement and Optimization Study (fmincon part) of the final report.</p>
-
-          <h4>Results and what it is worth</h4>
-          <p><code>fmincon</code>'s best-of-5 multi-start run reached an objective of 326 in 83.4 s with 1.165 m
-          average tracking error; SLSQP's best-of-10 run reached &asymp;328 in 585 s &mdash; seven times slower
-          &mdash; with 1.871 m average error, so for this problem size the interior-point method was both faster and
-          more accurate. The sensitivity sweep showed raising the state-tracking weight <em>Q</em> tenfold cut
-          tracking error by 7.2% (the single most effective lever), while raising the terminal weight
-          <em>Q<sub>f</sub></em> cut final-position error by about 60% at the cost of 3.1% worse average tracking
-          &mdash; a clean path-accuracy-vs-endpoint-accuracy trade-off. On the safety side, widening the obstacle
-          clearance from 0.3 m to 0.8 m was the most expensive constraint, costing 8.0% more tracking error, while
-          relaxing inter-quad spacing from 0.8 m to 0.3 m improved tracking by 4.3%; the Lagrange-multiplier analysis
-          confirmed this directly, with the obstacle-avoidance constraints carrying the largest active multipliers
-          (up to &asymp;24) at exactly the moments each quadrotor passed closest to a moving obstacle.</p>
         </div>
       </article>
 
       <!-- ---------- VEGETATION / 16-350 ---------- -->
       <article class="project" id="p-veg">
         <div class="proj-head">
-          <div class="thumb">Media placeholder — Gazebo scene / costmap before &amp; after</div>
+          <div class="thumb"><img src="images/thumb-veg.jpg" alt="Husky robot navigating dense vegetation"></div>
           <div class="proj-text">
-            <a class="proj-title" href="#p-veg">Proprioceptive Navigation Through Vegetation</a>
-            <p class="meta">16-350 · Course project · Mar – May 2025</p>
-            <p class="tagline ph">[One sentence: a ground robot that learns which tall grass it can drive through.]</p>
+            <a class="proj-title" href="https://github.com/w3ichen/vegmap" rel="noopener">Proprioceptive Navigation Through Vegetation</a>
+            <p class="meta">16-350 · with David Seong, Weichen Qiu · Mar – May 2025</p>
+            <p class="tagline">A Husky robot in Gazebo/ROS2 treats vegetation as traversable-at-a-cost rather than an obstacle, updating a Bayesian cost map from proprioceptive feedback so D* Lite replans a cheaper path than static A*.</p>
           </div>
-        </div>
-
-        <div class="proj-body">
-          <h4>The problem</h4>
-          <p class="ph">[Lidar sees grass as a wall; the robot stops for obstacles that are not obstacles.]</p>
-
-          <h4>Approach</h4>
-          <p class="ph">[D* Lite over a custom Nav2 costmap, with a contact model that updates
-          traversability from what the robot feels as it drives.]</p>
-
-          <h4>My contribution</h4>
-          <p class="ph">[Which module was yours; what you tuned and validated.]</p>
-
-          <h4>Results and what it is worth</h4>
-          <p class="ph">[Path length / replan count / success across N trials.
-          Value: search-and-rescue and agricultural robots that stop giving up on passable terrain.]</p>
         </div>
       </article>
 
       <!-- ---------- MAZE SOLVER / 24-668 ---------- -->
       <article class="project" id="p-maze">
         <div class="proj-head">
-          <div class="thumb">Media placeholder — platform photo (Fig. 1–4 from the paper)</div>
+          <div class="thumb"><img src="images/thumb-maze.jpg" alt="Servo motors and IMU mounted on the tilting maze platform"></div>
           <div class="proj-text">
             <a class="proj-title" href="#p-maze">Tilted: A Low-Cost Mechatronic Maze-Solving Platform</a>
-            <p class="meta">24-668 Mechatronics Applications in Mechanical Engineering · with Avery Kress, Nathan O&rsquo;Neill, Sander Schulman · Fall 2025</p>
-            <p class="tagline">A 2-DOF tilting-plate robot that autonomously solves arbitrary laser-cut mazes: it tilts the plate to roll a ball to the goal, using an overhead camera for vision, A* for path planning, and a discrete-time LQR for control.</p>
+            <p class="meta">24-668 Mechatronics Applications in Mechanical Engineering · with Avery Kress, Nathan O&rsquo;Neill, Sander Schulman</p>
+            <p class="tagline">A 2-DOF tilting-plate robot solves arbitrary laser-cut mazes with vision, A*, and a discrete LQR — 100% success on straight and single-turn mazes, dropping to 60&ndash;70% on tighter multi-turn paths.</p>
           </div>
-        </div>
-
-        <div class="proj-body">
-          <h4>The problem</h4>
-          <p>Guide a ball from a start cell to a goal cell through an arbitrary 2D maze cut into a square plate,
-          actuated in roll and pitch by two hobby servos, using only a single overhead camera for sensing and an
-          onboard battery for power — while staying within servo angle limits and without the ball leaving the
-          maze.</p>
-
-          <h4>Approach</h4>
-          <p>Mechanically, a nested-ring gimbal (laser-cut plywood inner rings, an acrylic outer ring) carries an
-          8&Prime;&times;8&Prime; maze plate with a whiteboard sticker so mazes can be redrawn; HS-645MG servos drive
-          each axis through short linkages, with hard stops to about &plusmn;6&deg;. A Raspberry Pi 5 and camera run
-          an HSV-based pipeline to find the ball and goal and a Canny-edge pipeline to extract the maze walls into a
-          binary occupancy map; a separate boundary-contour check keeps the ball from rolling off the plate edge
-          regardless of the maze itself. Path planning builds a distance-transform cost map from that occupancy
-          map and runs A*, then a low-pass filter removes the grid search's zig-zag, and a curvature-aware
-          look-ahead selector densifies waypoints on tight turns and backs off the look-ahead distance near corners.
-          Control linearizes the ball-on-plate dynamics (<code>ẍ = (5g/7)&theta;</code>), discretizes at 100 Hz, and
-          runs a per-axis discrete-time infinite-horizon LQR with a feedforward term — tunable live through a GUI
-          that visualizes closed-loop eigenvalues and step response, which doubles as a teaching tool for
-          state-space control. An Arduino (chosen over the Pi for deterministic PWM timing) drives the servos at
-          0.25&deg; resolution and runs an IMU-based auto-leveling routine before every run to compensate for
-          mechanical drift.</p>
-
-          <h4>My contribution</h4>
-          <p class="ph">[Team of four — note which subsystem (mechanical / electronics / vision / planning /
-          control) was specifically yours, and any bugs or design calls you want to call out by name.]</p>
-
-          <h4>Results and what it is worth</h4>
-          <p>Across four canonical maze types (10 trials each), the system reached 100% success on straight-line
-          and single-turn mazes with low steady-state error, 70% on U-turns, and 60% on multi-turn/spiral mazes.
-          Failures concentrated on sustained-curvature paths, where accumulated friction, vision latency, and tilt
-          saturation compound as the ball continuously changes direction — a clear limit of the linearized model
-          rather than of the mechanism itself.</p>
         </div>
       </article>
     </div>
@@ -656,34 +388,6 @@
             <li>Git-based collaboration across lab machines</li>
             <li>Technical writing in English and Chinese</li>
           </ul>
-        </div>
-      </div>
-      <div class="todo"><b>TODO:</b> Read the postings you actually want, check their keywords against this screen one by one, and
-      order the columns by the role you most want to be hired for.</div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ============================ RESUME ============================ -->
-  <section id="resume">
-    <div class="wrap">
-      <div class="sec-head"><h2>Résumé</h2></div>
-      <div class="resume-grid">
-        <div class="resume-frame">One-page résumé preview<br>(embed the PDF here, US Letter)</div>
-        <div>
-          <p class="ph">[A short orientation line: what the résumé covers, and the version on this page —
-          planning and controls. Say when it was last updated.]</p>
-          <p class="resume-links">
-            <a href="#resume">Download PDF</a><span class="sep">/</span>
-            <a href="#contact">Ask for the other version</a>
-          </p>
-          <div class="todo">
-            <b>TODO:</b> The course wants a one-page résumé in English; the current one is a Chinese docx, so it needs
-            a US Letter rewrite. Serve it as a PDF — it previews in the browser and the layout cannot shift — with a
-            download link beside it. Publish only one of your two versions (planning &amp; controls, or learning) and
-            send the other on request.
-          </div>
         </div>
       </div>
     </div>

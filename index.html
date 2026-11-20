@@ -144,13 +144,11 @@
   .project + .project { border-top: 1px solid var(--line); }
 
   .proj-head { display: flex; gap: 24px; align-items: center; }
-  .thumb {
-    flex: 0 0 240px; aspect-ratio: 16 / 9; border-radius: var(--radius);
-    background: var(--soft); overflow: hidden; display: block;
-  }
-  .thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .thumb { flex: 0 0 240px; }
+  .thumb img { width: 100%; height: auto; border-radius: var(--radius); display: block; }
   .thumb.ph {
-    border: 1px dashed var(--line); display: grid; place-items: center; text-align: center; padding: 14px;
+    aspect-ratio: 4 / 3; border: 1px dashed var(--line); border-radius: var(--radius); background: var(--soft);
+    display: grid; place-items: center; text-align: center; padding: 14px;
     color: var(--muted); font-size: 12.5px; font-style: italic;
   }
   .proj-text { flex: 1 1 auto; min-width: 0; }
@@ -337,7 +335,7 @@
       <!-- ---------- MAZE SOLVER / 24-668 ---------- -->
       <article class="project" id="p-maze">
         <div class="proj-head">
-          <div class="thumb"><img src="images/thumb-maze.jpg" alt="Servo motors and IMU mounted on the tilting maze platform"></div>
+          <div class="thumb"><img src="images/thumb-maze.jpg" alt="CAD layout of the laser-cut gimbal frame and gantry components"></div>
           <div class="proj-text">
             <a class="proj-title" href="#p-maze">Tilted: A Low-Cost Mechatronic Maze-Solving Platform</a>
             <p class="meta">24-668 Mechatronics Applications in Mechanical Engineering · with Avery Kress, Nathan O&rsquo;Neill, Sander Schulman</p>

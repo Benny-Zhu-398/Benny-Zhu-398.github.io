@@ -7,80 +7,57 @@
 <title>Haozheng Zhu Robotics Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap">
 <style>
   /* ============================================================
-     TOKENS — every color and typeface lives here; restyling means editing this block only
+     TOKENS
      ============================================================ */
   :root {
-    --bg:        #f3f5f7;
-    --surface:   #ffffff;
-    --ink:       #12181f;
-    --muted:     #5a6774;
-    --line:      #d8dee5;
-    --accent:    #1d5c72;
-    --accent-ink:#ffffff;
-    --soft:      #e7eef2;
-    --warn:      #9a5b12;
-    --warn-soft: #fbf1e2;
-
-    --font-display: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
-    --font-body:    "IBM Plex Serif", Georgia, "Times New Roman", serif;
-    --font-mono:    "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
-
-    --radius: 4px;
-    --maxw: 1080px;
-    --measure: 66ch;
-  }
-
-  /* Style B — LAB: tighter, sans-serif body text, cool grey */
-  :root[data-style="lab"] {
-    --bg: #eef0f2;
+    --bg:      #ffffff;
     --surface: #ffffff;
-    --accent: #2f4858;
-    --soft: #e4e8eb;
-    --font-body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
-    --radius: 2px;
-  }
-  /* Style C — WARM: warm paper ground, brick-red accent, softer edges */
-  :root[data-style="warm"] {
-    --bg: #f6f2ec;
-    --surface: #fffdfa;
-    --line: #e2d9cc;
-    --accent: #8a3f2a;
-    --soft: #f1e5dd;
-    --radius: 10px;
+    --ink:     #111111;
+    --muted:   #5c6166;
+    --line:    #dddddd;
+    --accent:  #0d5db8;
+    --accent-hover: #4a85c8;
+    --soft:    #f3f4f5;
+    --warn:       #8a6d1b;
+    --warn-soft:  #f7eec5;
+
+    --font: "Raleway", "Helvetica Neue", Arial, sans-serif;
+
+    --radius: 8px;
+    --radius-lg: 10px;
+    --maxw: 1040px;
+    --measure: 72ch;
   }
 
-  /* Dark theme: grounds and text only — each style keeps its own accent and typefaces */
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --bg: #0e1319;
-      --surface: #161d25;
-      --ink: #e8edf2;
-      --muted: #97a4b2;
-      --line: #2a343f;
-      --soft: #1d2732;
-      --accent: #6fb3c9;
-      --accent-ink: #0e1319;
-      --warn: #e0ab6a;
-      --warn-soft: #2a2317;
+      --bg:      #0f1113;
+      --surface: #15181b;
+      --ink:     #e9e9ea;
+      --muted:   #9aa3ab;
+      --line:    #2b2f33;
+      --accent:  #6fb3e0;
+      --accent-hover: #8fc4ea;
+      --soft:    #1b1e21;
+      --warn:       #caa24c;
+      --warn-soft:  rgba(202, 162, 76, .14);
     }
-    :root[data-style="warm"]:not([data-theme="light"]) { --accent: #e08a6d; --soft: #2a1f1a; --line: #33282320; }
   }
   :root[data-theme="dark"] {
-    --bg: #0e1319;
-    --surface: #161d25;
-    --ink: #e8edf2;
-    --muted: #97a4b2;
-    --line: #2a343f;
-    --soft: #1d2732;
-    --accent: #6fb3c9;
-    --accent-ink: #0e1319;
-    --warn: #e0ab6a;
-    --warn-soft: #2a2317;
+    --bg:      #0f1113;
+    --surface: #15181b;
+    --ink:     #e9e9ea;
+    --muted:   #9aa3ab;
+    --line:    #2b2f33;
+    --accent:  #6fb3e0;
+    --accent-hover: #8fc4ea;
+    --soft:    #1b1e21;
+    --warn:       #caa24c;
+    --warn-soft:  rgba(202, 162, 76, .14);
   }
-  :root[data-style="warm"][data-theme="dark"] { --accent: #e08a6d; --soft: #2a1f1a; }
 
   /* ============================================================
      BASE
@@ -90,147 +67,149 @@
     margin: 0;
     background: var(--bg);
     color: var(--ink);
-    font-family: var(--font-body);
-    font-size: 17px;
+    font-family: var(--font);
+    font-size: 16px;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 600; text-wrap: balance; margin: 0; line-height: 1.2; }
+  h1, h2, h3, h4 { font-family: var(--font); font-weight: 700; margin: 0; line-height: 1.25; color: var(--ink); }
   p { margin: 0; }
-  a { color: var(--accent); text-underline-offset: 3px; }
-  img { max-width: 100%; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { border-bottom: 1px solid var(--accent-hover); }
+  img, video { max-width: 100%; }
 
   .wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: 20px; }
-  .label {
-    font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em;
-    text-transform: uppercase; color: var(--muted);
-  }
   .skip {
-    position: absolute; left: -9999px; top: 0; background: var(--accent); color: var(--accent-ink);
+    position: absolute; left: -9999px; top: 0; background: var(--accent); color: #fff;
     padding: 10px 16px; z-index: 100;
   }
   .skip:focus { left: 8px; top: 8px; }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .divider { border-top: 1px solid var(--line); }
+
+  /* placeholder / instructional text */
+  .ph { color: var(--muted); font-style: italic; }
+  .todo {
+    font-size: 13.5px; line-height: 1.6; color: var(--warn); background: var(--warn-soft);
+    padding: 10px 14px; border-radius: 0 var(--radius) var(--radius) 0; border-left: 2px solid var(--warn);
+    margin-top: 12px; max-width: var(--measure);
+  }
+  .todo b { font-weight: 700; }
 
   /* ============================================================
      HEADER / NAV
      ============================================================ */
   header.site {
     position: sticky; top: env(safe-area-inset-top, 0px); z-index: 40;
-    background: color-mix(in srgb, var(--bg) 88%, transparent);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--line);
+    background: var(--bg); border-bottom: 1px solid var(--line);
   }
-  .bar { display: flex; align-items: center; gap: 16px; padding-block: 12px; flex-wrap: wrap; }
-  .wordmark { font-family: var(--font-display); font-weight: 600; font-size: 16px; letter-spacing: -.01em; text-decoration: none; color: var(--ink); }
+  .bar { display: flex; align-items: center; gap: 16px; padding-block: 14px; flex-wrap: wrap; }
+  .wordmark { font-weight: 700; font-size: 16px; color: var(--ink); }
+  .wordmark:hover { border-bottom: none; }
   .wordmark span { color: var(--muted); font-weight: 400; }
-  nav.main { margin-left: auto; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; max-width: 100%; }
+  nav.main { margin-left: auto; display: flex; gap: 18px; overflow-x: auto; scrollbar-width: none; max-width: 100%; }
   nav.main::-webkit-scrollbar { display: none; }
   nav.main a {
-    font-family: var(--font-display); font-size: 14px; text-decoration: none; color: var(--muted);
-    padding: 6px 10px; border-radius: var(--radius); white-space: nowrap;
+    font-size: 14px; color: var(--muted); white-space: nowrap; padding-bottom: 2px;
   }
-  nav.main a:hover { color: var(--ink); background: var(--soft); }
-  nav.main a[aria-current="true"] { color: var(--ink); background: var(--soft); }
-
-  /* Draft-only style picker — delete this block before publishing */
-  .styler { display: flex; align-items: center; gap: 6px; padding-block: 8px; border-top: 1px dashed var(--line); flex-wrap: wrap; }
-  .styler button {
-    font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
-    background: transparent; color: var(--muted); border: 1px solid var(--line);
-    border-radius: var(--radius); padding: 4px 9px; cursor: pointer;
-  }
-  .styler button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  nav.main a:hover { color: var(--ink); border-bottom: 1px solid var(--accent-hover); }
+  nav.main a[aria-current="true"] { color: var(--ink); border-bottom: 1px solid var(--accent); font-weight: 600; }
 
   /* ============================================================
      SECTIONS
      ============================================================ */
-  section { padding-block: 64px; scroll-margin-top: 96px; }
-  section + section { border-top: 1px solid var(--line); }
-  .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 28px; flex-wrap: wrap; }
-  .sec-head h2 { font-size: clamp(24px, 3.4vw, 32px); }
+  section { padding-block: 44px; scroll-margin-top: 72px; }
+  .sec-head { margin-bottom: 6px; }
+  .sec-head h2 { font-size: 26px; }
+  .sec-note { color: var(--muted); font-style: italic; font-size: 14px; margin-top: 4px; margin-bottom: 24px; }
 
-  /* HERO */
-  .hero { padding-block: clamp(56px, 9vw, 96px) 64px; }
-  .hero h1 { font-size: clamp(34px, 6vw, 56px); letter-spacing: -.02em; }
-  .hero .lede { font-size: clamp(18px, 2.3vw, 21px); color: var(--muted); max-width: var(--measure); margin-top: 18px; }
-  .hero-meta { display: flex; gap: 10px 22px; flex-wrap: wrap; margin-top: 28px; }
-  .cta-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 28px; }
-  .btn {
-    font-family: var(--font-display); font-size: 14px; text-decoration: none;
-    padding: 10px 18px; border-radius: var(--radius); border: 1px solid var(--accent);
-    background: var(--accent); color: var(--accent-ink);
-  }
-  .btn.ghost { background: transparent; color: var(--accent); }
-
-  /* ABOUT */
-  .about-grid { display: grid; grid-template-columns: 220px 1fr; gap: 36px; align-items: start; }
-  .about-grid p + p { margin-top: 14px; }
-  .about-grid .body { max-width: var(--measure); }
+  /* ============================================================
+     PROFILE (hero + about, merged)
+     ============================================================ */
+  .profile { padding-block: 48px 44px; }
+  .profile-row { display: flex; gap: 40px; align-items: flex-start; }
+  .profile-photo { flex: 0 0 220px; }
   .portrait {
-    aspect-ratio: 4 / 5; max-width: 100%; border: 1px dashed var(--line); border-radius: var(--radius);
-    background: var(--soft); display: grid; place-items: center; text-align: center; padding: 16px;
+    width: 220px; aspect-ratio: 4 / 5; border-radius: var(--radius-lg);
+    background: var(--soft); display: block; overflow: hidden;
   }
-
-  /* PROJECT INDEX */
-  .proj-index { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin-bottom: 44px; }
-  .proj-index a {
-    display: block; text-decoration: none; color: inherit; background: var(--surface);
-    border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px;
+  .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 58% 32%; display: block; }
+  .portrait.ph {
+    border: 1px dashed var(--line); display: grid; place-items: center; text-align: center; padding: 14px;
+    color: var(--muted); font-size: 13px; font-style: italic;
   }
-  .proj-index a:hover { border-color: var(--accent); }
-  .proj-index strong { display: block; font-family: var(--font-display); font-size: 15px; margin-top: 6px; }
-  .proj-index em { font-style: normal; color: var(--muted); font-size: 14px; }
+  .profile-links { margin-top: 14px; font-size: 15px; }
+  .profile-links a { font-weight: 600; }
+  .profile-links .sep { color: var(--muted); margin: 0 6px; }
 
-  /* PROJECT ENTRY */
-  .project { padding-top: 40px; }
+  .profile-intro { flex: 1 1 auto; min-width: 0; }
+  .profile-intro h1 { font-size: clamp(28px, 4vw, 38px); margin-bottom: 10px; }
+  .status { color: var(--muted); font-style: italic; font-size: 15px; margin-bottom: 18px; }
+  .profile-intro p + p { margin-top: 14px; }
+  .profile-intro .body { max-width: var(--measure); }
+
+  /* ============================================================
+     PROJECTS
+     ============================================================ */
+  .proj-index { margin: 0 0 36px; padding-left: 20px; list-style: disc; color: var(--ink); }
+  .proj-index li { margin-bottom: 6px; font-size: 15px; }
+  .proj-index i { color: var(--muted); font-style: italic; }
+
+  .project { padding-top: 36px; }
   .project + .project { border-top: 1px solid var(--line); }
-  .project > h3 { font-size: clamp(21px, 2.8vw, 26px); margin-top: 8px; }
-  .project .tagline { color: var(--muted); max-width: var(--measure); margin-top: 10px; }
-  .media {
-    margin: 26px 0; aspect-ratio: 16 / 7; max-width: 100%; border: 1px dashed var(--line);
-    border-radius: var(--radius); background: var(--soft); display: grid; place-items: center;
-    text-align: center; padding: 20px;
-  }
-  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; margin: 22px 0 6px; padding: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
-  .facts div p { font-family: var(--font-display); font-size: 14px; margin-top: 4px; }
-  .imrd { display: grid; gap: 22px; margin-top: 26px; }
-  .imrd h4 { font-size: 15px; letter-spacing: .01em; }
-  .imrd h4 + p { margin-top: 6px; max-width: var(--measure); }
-  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
-  .tags span { font-family: var(--font-mono); font-size: 11px; padding: 3px 8px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); }
 
-  /* SKILLS */
-  .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
-  .skills section, .skills .col { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; }
-  .skills h3 { font-size: 15px; margin-bottom: 10px; }
+  .proj-head { display: flex; gap: 24px; align-items: flex-start; }
+  .thumb {
+    flex: 0 0 240px; aspect-ratio: 16 / 9; border: 1px dashed var(--line); border-radius: var(--radius);
+    background: var(--soft); display: grid; place-items: center; text-align: center; padding: 14px;
+    color: var(--muted); font-size: 12.5px; font-style: italic;
+  }
+  .proj-text { flex: 1 1 auto; min-width: 0; }
+  .proj-title { font-size: 20px; font-weight: 700; color: var(--ink); display: inline-block; }
+  .proj-title:hover { border-bottom: 1px solid var(--accent-hover); }
+  .meta { color: var(--muted); font-style: italic; font-size: 14px; margin-top: 6px; }
+  .tagline { margin-top: 8px; max-width: var(--measure); }
+
+  .proj-body { margin-top: 20px; max-width: var(--measure); }
+  .proj-body h4 { font-size: 15px; margin-top: 18px; }
+  .proj-body h4 + p { margin-top: 6px; }
+
+  /* ============================================================
+     SKILLS
+     ============================================================ */
+  .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px 24px; }
+  .skills h3 { font-size: 16px; margin-bottom: 10px; }
   .skills ul { margin: 0; padding-left: 18px; font-size: 15px; }
-  .skills li { margin-bottom: 4px; }
+  .skills li { margin-bottom: 5px; }
 
-  /* RESUME */
-  .resume-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
-  .resume-frame { aspect-ratio: 8.5 / 11; border: 1px dashed var(--line); background: var(--soft); border-radius: var(--radius); display: grid; place-items: center; text-align: center; padding: 20px; }
-
-  /* CONTACT */
-  .contact-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; margin-top: 20px; }
-  .contact-list a { font-family: var(--font-display); font-size: 15px; }
-
-  footer.site { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var(--muted); font-size: 14px; }
-
-  /* TODO callouts — delete all of them before publishing */
-  .todo {
-    font-family: var(--font-display); font-size: 13.5px; line-height: 1.55;
-    color: var(--warn); background: var(--warn-soft); border-left: 2px solid var(--warn);
-    padding: 10px 14px; border-radius: 0 var(--radius) var(--radius) 0; margin-top: 10px; max-width: var(--measure);
+  /* ============================================================
+     RESUME
+     ============================================================ */
+  .resume-grid { display: grid; grid-template-columns: 300px 1fr; gap: 32px; align-items: start; }
+  .resume-frame {
+    aspect-ratio: 8.5 / 11; border: 1px dashed var(--line); background: var(--soft); border-radius: var(--radius);
+    display: grid; place-items: center; text-align: center; padding: 18px; color: var(--muted); font-size: 13px; font-style: italic;
   }
-  .todo b { font-weight: 600; }
-  .ph { color: var(--muted); }
+  .resume-links { margin-top: 18px; font-size: 15px; }
+  .resume-links .sep { color: var(--muted); margin: 0 6px; }
+
+  /* ============================================================
+     CONTACT
+     ============================================================ */
+  .contact-list { margin-top: 18px; }
+  .contact-list div { margin-bottom: 10px; font-size: 15px; }
+  .contact-list .k { color: var(--muted); display: inline-block; width: 120px; font-style: italic; }
+
+  footer.site { border-top: 1px solid var(--line); padding-block: 24px 36px; color: var(--muted); font-size: 13.5px; }
 
   @media (max-width: 760px) {
-    .about-grid { grid-template-columns: 1fr; }
-    .portrait { max-width: 200px; }
+    .profile-row { flex-direction: column; }
+    .profile-photo { flex: none; }
+    .proj-head { flex-direction: column; }
+    .thumb { flex: none; width: 100%; }
     .resume-grid { grid-template-columns: 1fr; }
-    section { padding-block: 48px; }
+    section { padding-block: 32px; }
   }
   @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
   html { scroll-behavior: smooth; }
@@ -252,58 +231,35 @@
         <a href="#contact">Contact</a>
       </nav>
     </div>
-    <div class="styler" role="group" aria-label="Draft style picker">
-      <span class="label">Draft style</span>
-      <button type="button" data-set="plex" aria-pressed="true">A · Plex</button>
-      <button type="button" data-set="lab" aria-pressed="false">B · Lab</button>
-      <button type="button" data-set="warm" aria-pressed="false">C · Warm</button>
-      <span class="label" style="margin-left:auto">Remove this bar before publishing</span>
-    </div>
   </div>
 </header>
 
 <main id="main">
   <div id="top"></div>
 
-  <!-- ============================ HERO ============================ -->
-  <section class="hero">
-    <div class="wrap">
-      <p class="label">MS Mechanical Engineering (Research) · Carnegie Mellon University</p>
-      <h1>Haozheng “Benny” Zhu</h1>
-      <p class="lede">
-        I build motion planning and learning pipelines that let robot arms work in contact —
-        assembling parts, pushing objects, and recovering when the plan meets the real world.
-      </p>
-      <div class="hero-meta">
-        <span class="label">Search-Based Planning Lab · Advisor: Prof. Maxim Likhachev</span>
-        <span class="label">Pittsburgh, PA</span>
-        <span class="label">Seeking full-time robotics algorithm roles, 2026</span>
+  <!-- ============================ PROFILE (hero + about) ============================ -->
+  <section class="profile" id="about">
+    <div class="wrap profile-row">
+      <div class="profile-photo">
+        <div class="portrait"><img src="images/profile.jpg" alt="Haozheng (Benny) Zhu"></div>
+        <p class="profile-links">
+          <a href="#resume">Résumé</a><span class="sep">/</span>
+          <a href="https://github.com/Benny-Zhu-398" rel="noopener">GitHub</a><span class="sep">/</span>
+          <a href="#contact" class="ph">LinkedIn</a><span class="sep">/</span>
+          <a href="#contact" class="ph">Google Scholar</a>
+        </p>
       </div>
-      <div class="cta-row">
-        <a class="btn" href="#projects">See the work</a>
-        <a class="btn ghost" href="#resume">One-page résumé</a>
-      </div>
-      <div class="todo">
-        <b>TODO:</b> This lede is the elevator pitch — one sentence on what you can do and who it is useful to.
-        Rewrite it in the language of the employers you are targeting (robot manufacturers, warehouse
-        automation, industrial automation) rather than in method names alone.
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================ ABOUT ============================ -->
-  <section id="about">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="label">01</span>
-        <h2>About me</h2>
-      </div>
-      <div class="about-grid">
-        <div class="portrait"><span class="label">Portrait<br>photo placeholder<br>(4:5)</span></div>
+      <div class="profile-intro">
+        <h1>Haozheng &ldquo;Benny&rdquo; Zhu</h1>
+        <p class="status">MS Mechanical Engineering (Research) · Carnegie Mellon University · Search-Based Planning Lab · Advisor: Prof. Maxim Likhachev · Pittsburgh, PA · Seeking full-time robotics algorithm roles, 2026</p>
         <div class="body">
           <p class="ph">
+            I build motion planning and learning pipelines that let robot arms work in contact —
+            assembling parts, pushing objects, and recovering when the plan meets the real world.
+          </p>
+          <p class="ph">
             [Opening paragraph — who you are and what you work on. Name the field in plain words before
-            the jargon: “I work on how robot arms plan motions when they have to touch things.”]
+            the jargon: &ldquo;I work on how robot arms plan motions when they have to touch things.&rdquo;]
           </p>
           <p class="ph">
             [Second paragraph — the path that got you here: soft robotics at SJTU, an exchange year at CMU,
@@ -314,185 +270,361 @@
             looking for, and what you bring to it.]
           </p>
           <div class="todo">
-            <b>TODO:</b> Two of the assignment's writing requirements should land right here: the
+            <b>TODO:</b> Rewrite the first line as the elevator pitch — one sentence on what you can do and
+            who it is useful to, in the language of the employers you are targeting (robot manufacturers,
+            warehouse automation, industrial automation) rather than in method names alone. Then work in the
             <b>known/new contract</b> (open each sentence with what the reader already knows, then add the new
             information) and the <b>social value</b> of the work — for example, the repetitive assembly-line
-            motions that wear out people's wrists. Keep it to 150–200 words across three paragraphs.
+            motions that wear out people's wrists. Keep the three paragraphs to 150–200 words total.
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  <div class="divider"></div>
 
   <!-- ============================ PROJECTS ============================ -->
   <section id="projects">
     <div class="wrap">
-      <div class="sec-head">
-        <span class="label">02</span>
-        <h2>Projects</h2>
-        <span class="label" style="margin-left:auto">Five entries · four required</span>
-      </div>
+      <div class="sec-head"><h2>Projects</h2></div>
+      <p class="sec-note">Click a title to jump down.</p>
 
-      <div class="proj-index">
-        <a href="#p1"><span class="label">Competition · 2026</span><strong>Dual-Arm Industrial Assembly</strong><em>RoCo Challenge, IROS 2026</em></a>
-        <a href="#p2"><span class="label">Research · CMU SBPL</span><strong>Experience-Guided Contact-Rich Planning</strong><em>TMEG</em></a>
-        <a href="#p3"><span class="label">Course project · 2025</span><strong>Proprioceptive Navigation in Vegetation</strong><em>ROS 2 · Husky · D* Lite</em></a>
-        <a href="#p4"><span class="label">Internship · 2024</span><strong>Bin-Picking for Ship Components</strong><em>SJTU–Fraunhofer IMIC</em></a>
-        <a href="#p5"><span class="label">Additional</span><strong>Soft Pneumatic Actuators</strong><em>SJTU Robotics Institute</em></a>
-      </div>
+      <ul class="proj-index">
+        <li><a href="#p-esim">Experience-Guided Planning for Contact-Rich Manipulation</a> <i>— CMU Search-Based Planning Lab</i></li>
+        <li><a href="#p-roco">Dual-Arm Industrial Assembly for the RoCo Challenge</a> <i>— RoCo Challenge, IROS 2026</i></li>
+        <li><a href="#p-flow">Flow Matching for Legged Locomotion</a> <i>— materials pending</i></li>
+        <li><a href="#p-shadow">Dexterous In-Hand Manipulation with Shadow Hand</a> <i>— with Xinxuan Tang</i></li>
+        <li><a href="#p-drone">Optimal Control of Quadrotor for Obstacle Avoidance</a> <i>— 24-785</i></li>
+        <li><a href="#p-veg">Proprioceptive Navigation Through Vegetation</a> <i>— 16-350</i></li>
+        <li><a href="#p-maze">Tilted: A Low-Cost Mechatronic Maze-Solving Platform</a> <i>— 24-668</i></li>
+      </ul>
 
-      <!-- ---------- PROJECT 1 ---------- -->
-      <article class="project" id="p1">
-        <p class="label">Project 01 · Team of [N] · Jan 2026 – present</p>
-        <h3>Dual-Arm Industrial Assembly for the RoCo Challenge</h3>
-        <p class="tagline ph">[One sentence a recruiter can repeat: what the robot does, and how well it does it.]</p>
-
-        <div class="media"><span class="label">Media placeholder — rollout GIF or sim screenshot<br>(16:7, &lt; 3 MB, with a caption)</span></div>
-
-        <div class="facts">
-          <div><span class="label">My role</span><p class="ph">[e.g. policy training &amp; evaluation]</p></div>
-          <div><span class="label">Team</span><p class="ph">[N people, your slice]</p></div>
-          <div><span class="label">Tools</span><p>Isaac Sim 5.1 · PyTorch · LeRobot</p></div>
-          <div><span class="label">Status</span><p class="ph">[submitted / in progress]</p></div>
-        </div>
-
-        <div class="imrd">
-          <div>
-            <h4>The problem</h4>
-            <p class="ph">[What industrial task board assembly is, and why gears, connectors and snap-fits are
-            hard for robots: tight tolerances, contact, no clean visual feedback at the moment of insertion.]</p>
-          </div>
-          <div>
-            <h4>Approach</h4>
-            <p class="ph">[The pipeline in reader-first order: dataset collection → part-grouped policies
-            (vision-based diffusion policy, ACT, pi0.5) → residual RL on the hardest snap-fit → unified evaluation.
-            One diagram here would do more than a paragraph.]</p>
-          </div>
-          <div>
-            <h4>My contribution</h4>
-            <p class="ph">[Be explicit and first-person: what you designed, debugged, trained, and decided.
-            Name the bugs you found and the calls you made — the rotation-convention mismatch, the curriculum design.]</p>
-          </div>
-          <div>
-            <h4>Results and what it is worth</h4>
-            <p class="ph">[Numbers: success rate per part group, cycle time, how many demos it took.
-            Then the social value: assembly work that is repetitive and injury-prone for people.]</p>
+      <!-- ---------- E-SIM-MJ ---------- -->
+      <article class="project" id="p-esim">
+        <div class="proj-head">
+          <div class="thumb">Media placeholder — search-graph growth GIF or PushT rollout</div>
+          <div class="proj-text">
+            <a class="proj-title" href="https://github.com/devanshroyal-7/e-sim-mj" rel="noopener">Experience-Guided Planning for Contact-Rich Manipulation</a>
+            <p class="meta">Research · CMU Search-Based Planning Lab · Advisor: Prof. Maxim Likhachev</p>
+            <p class="tagline">A MuJoCo-native planner that searches directly over physics rollouts to push a block to a goal pose, and reuses a library of previously solved pushes to cut search cost on related problems.</p>
           </div>
         </div>
-        <div class="tags"><span>Imitation learning</span><span>Diffusion policy</span><span>ACT</span><span>Residual RL</span><span>Isaac Sim</span></div>
-        <div class="todo"><b>TODO:</b> This is the strongest entry, so keep it first and give it a pipeline diagram
-        plus a rollout clip. Even before the final numbers are in, write the placeholders in their finished shape
-        (“__ / 9 parts, __% success over __ trials”) so you can see what is still missing.</div>
+
+        <div class="proj-body">
+          <h4>The problem</h4>
+          <p>Sampling- and search-based planners that treat a contact-rich push as a kinematic search have to
+          resolve every contact interaction from scratch, even when a very similar push has already been solved
+          before. The goal is a planner that can recognize and reuse a past solution instead of re-deriving it.</p>
+
+          <h4>Approach</h4>
+          <p>Every search node stores a full MuJoCo snapshot (<code>mj_getState</code>/<code>mj_setState</code> on
+          <code>mjSTATE_INTEGRATION</code>, including <code>qacc_warmstart</code>), so restoring a branch recomputes
+          the exact same contacts as an uninterrupted rollout — verified to ~1e-12 by a dedicated restore-invariance
+          test. A weighted A* (<code>f = g + w·h</code>) expands eight end-effector-delta primitives per node,
+          scored by remaining pose error plus end-effector reach; success is silhouette coverage of the goal shape,
+          not a pose threshold. Experience A* additionally lets any expanded node attach a stored push from a
+          library of past solves, warped onto the current object pose by an SE(2) transform and screened
+          analytically before it is ever simulated. An RRT baseline (goal-biased sampling, nearest-node expansion)
+          is implemented for comparison. Everything runs on both a 2D puck and a 3D KUKA iiwa14 PushT task,
+          evaluated with reproducible seeded sweeps.</p>
+
+          <h4>My contribution</h4>
+          <p>Designed and implemented the capture/restore snapshot architecture and the weighted A* / experience-A*
+          planners built on it, the SE(2) experience-warping and lazy-attachment screening, and the ablation studies
+          comparing plain A*, RRT, and experience A* under matched search budgets.</p>
+
+          <h4>Results and what it is worth</h4>
+          <p>On a 20-seed sweep at matched search weight, attaching a 100-push library cut mean expansions from 603
+          to 547 (about 9%) at the same 90% success rate; isolating a single favorable seed, reuse took it from
+          1,311 expansions (84 s) down to 180 (13 s). The harder finding was about execution, not search: naively
+          replaying a stored push's joint trajectory after repositioning the arm succeeded on only 2 of 100 held-out
+          seeds, because sub-millimeter contact offsets compound within a few pushes. Restoring the arm into the
+          object's own contact frame — matching end-effector pose, contact points/normals, and posture, rather than
+          raw joint angles — raised execution success to 9 of 10 on a follow-up study, at fewer expansions and less
+          planning time than plain A*. The reuse benefit is real, but it is gated by how faithfully the stored
+          contact state is restored, not just by having the trajectory on hand.</p>
+        </div>
       </article>
 
-      <!-- ---------- PROJECT 2 ---------- -->
-      <article class="project" id="p2">
-        <p class="label">Project 02 · Research · CMU Search-Based Planning Lab</p>
-        <h3>Experience-Guided Planning for Contact-Rich Manipulation</h3>
-        <p class="tagline ph">[One sentence: reusing past motions so a planner does not solve the same hard problem twice.]</p>
-
-        <div class="media"><span class="label">Media placeholder — planner visualization / PushT rollout</span></div>
-
-        <div class="facts">
-          <div><span class="label">My role</span><p class="ph">[research assistant — planner design &amp; experiments]</p></div>
-          <div><span class="label">Advisor</span><p>Prof. Maxim Likhachev</p></div>
-          <div><span class="label">Tools</span><p>ManiSkill · C++/Python · OMPL-style RRT</p></div>
-          <div><span class="label">Status</span><p class="ph">[ongoing / paper in prep]</p></div>
+      <!-- ---------- RoCo DUAL-ARM ---------- -->
+      <article class="project" id="p-roco">
+        <div class="proj-head">
+          <div class="thumb">Media placeholder — rollout GIF or Isaac Sim screenshot (16:9)</div>
+          <div class="proj-text">
+            <a class="proj-title" href="https://github.com/Benny-Zhu-398/RoCo_Assembly" rel="noopener">Dual-Arm Industrial Assembly for the RoCo Challenge</a>
+            <p class="meta">Team entry · Industrial Task Board Assembly track, 2nd RoCo Challenge @ IROS 2026 · Jan 2026 – present</p>
+            <p class="tagline">A bimanual manipulation pipeline that picks nine industrial parts — gears, connectors, a pin, a rod, batteries — and assembles them onto a task board in Isaac Sim, scored part-by-part against the official evaluation harness.</p>
+          </div>
         </div>
 
-        <div class="imrd">
-          <div><h4>The problem</h4><p class="ph">[Why sampling-based planners struggle once the robot must push, slide or
-          maintain contact — the state space is no longer just the arm.]</p></div>
-          <div><h4>Approach</h4><p class="ph">[Experience graphs / learned forward models; the PushT benchmark;
-          the comparison against an A* baseline on the end effector.]</p></div>
-          <div><h4>My contribution</h4><p class="ph">[The RRT planner you built, the forward-model evaluation protocol
-          (horizon-16 SE(2) rollout error), what you measured and why.]</p></div>
-          <div><h4>Results and what it is worth</h4><p class="ph">[Planning time, success rate, error in mm/deg.
-          Value: robots that can be re-tasked in a day instead of re-engineered for weeks.]</p></div>
+        <div class="proj-body">
+          <h4>The problem</h4>
+          <p>The task board mixes two different placement problems: tight-tolerance &ldquo;snap&rdquo; connections
+          (USB/HDMI connectors, a pin, a rod) where millimeter-scale placement error matters, and looser
+          &ldquo;drop&rdquo; placements (gears onto a rack post, batteries into a cradle) that should settle into a
+          repeatable pose under gravity — all driven from a single-arm pick-and-place harness that scores each part
+          pass/fail independently.</p>
+
+          <h4>Approach</h4>
+          <p>The harness (Isaac Sim 5.1, a bimanual gripper with head and dual wrist cameras) hands each part to a
+          policy implementing a shared API; snap parts are confirmed by a proximity-triggered joint once the
+          gripper lands the part within tolerance, drop parts are graded by their settled pose. A scripted
+          waypoint-following baseline establishes a reference. Learned policies run as a sidecar process, since
+          Isaac Sim can't share its pinned Python environment with training stacks — adapters exist for LeRobot
+          Diffusion Policy and pi0.5, plus a project-specific vision-conditioned diffusion policy trained per
+          part group. Demonstrations are collected through a LeRobot-format pipeline with injected pose
+          disturbances during collection, so the trained policy sees off-nominal starts rather than only clean
+          scripted rollouts.</p>
+
+          <h4>My contribution</h4>
+          <p>Trained and iterated the vision-based diffusion policy for the battery-placement part group
+          (<code>battery_size1</code>/<code>battery_size5</code>), tuning it against the disturbance-augmented
+          dataset.</p>
+
+          <h4>Results and what it is worth</h4>
+          <p class="ph">[TODO: evaluation is still in progress ahead of the IROS 2026 submission — fill in
+          per-part-group success rate and cycle time once the harness run is final.]</p>
         </div>
-        <div class="tags"><span>Motion planning</span><span>RRT</span><span>Experience graphs</span><span>ManiSkill</span></div>
       </article>
 
-      <!-- ---------- PROJECT 3 ---------- -->
-      <article class="project" id="p3">
-        <p class="label">Project 03 · Course project · Mar – May 2025</p>
-        <h3>Proprioceptive Navigation Through Vegetation</h3>
-        <p class="tagline ph">[One sentence: a ground robot that learns which tall grass it can drive through.]</p>
-
-        <div class="media"><span class="label">Media placeholder — Gazebo scene / costmap before &amp; after</span></div>
-
-        <div class="facts">
-          <div><span class="label">My role</span><p class="ph">[your slice of a team of N]</p></div>
-          <div><span class="label">Course</span><p class="ph">[course number]</p></div>
-          <div><span class="label">Tools</span><p>ROS 2 · Gazebo · Husky · Nav2</p></div>
-          <div><span class="label">Status</span><p>Completed</p></div>
+      <!-- ---------- FLOW MATCHING ---------- -->
+      <article class="project" id="p-flow">
+        <div class="proj-head">
+          <div class="thumb">Media placeholder — Walker2d rollout GIF across target speeds</div>
+          <div class="proj-text">
+            <a class="proj-title" href="#p-flow">Flow Matching for Locomotion</a>
+            <p class="meta">24-782 · Team Stitch, with Gopalakrishnan Thirunellai Venkitachalam · Fall 2025</p>
+            <p class="tagline">A two-stage pipeline — a symmetry-regularized PPO expert feeding a Transformer-based Flow Matching model — that produces stable, velocity-conditioned bipedal locomotion and generalizes continuously across walking speeds the expert was never trained at.</p>
+          </div>
         </div>
 
-        <div class="imrd">
-          <div><h4>The problem</h4><p class="ph">[Lidar sees grass as a wall; the robot stops for obstacles that are not obstacles.]</p></div>
-          <div><h4>Approach</h4><p class="ph">[D* Lite over a custom Nav2 costmap, with a contact model that updates
-          traversability from what the robot feels as it drives.]</p></div>
-          <div><h4>My contribution</h4><p class="ph">[Which module was yours; what you tuned and validated.]</p></div>
-          <div><h4>Results and what it is worth</h4><p class="ph">[Path length / replan count / success across N trials.
-          Value: search-and-rescue and agricultural robots that stop giving up on passable terrain.]</p></div>
+        <div class="proj-body">
+          <h4>The problem</h4>
+          <p>Standard reward-driven RL policies for legged locomotion default to a unimodal Gaussian action
+          distribution, which struggles to represent the multimodal structure of natural gaits and tends to
+          collapse into asymmetric, lopsided walking — especially at higher target speeds. Separately, an RL expert
+          trained at a handful of discrete target velocities has no way to interpolate smoothly to a velocity it
+          was never trained on.</p>
+
+          <h4>Approach</h4>
+          <p>Stage one trains a symmetry-aware PPO expert on the MuJoCo Walker2d biped. Starting from the default
+          reward, we add a Gaussian velocity-tracking term and a freezing penalty (to stop the agent from
+          dragging one leg), then compare three ways of enforcing bilateral symmetry: a plain reward-shaped policy,
+          an auxiliary &ldquo;Mirrored-PPO&rdquo; loss that penalizes the policy's output disagreeing with its own
+          mirrored-state output, and a <em>phase-based mirroring</em> scheme that tracks a gait-cycle phase variable
+          and literally swaps left/right observations and actions once the agent crosses the half-cycle — training
+          one policy to implicitly serve both legs. The expert is curriculum-trained from 0.5 m/s up to 3.5 m/s.
+          Stage two collects a tiered, quality-filtered dataset from expert rollouts (episodes under 900 steps or
+          near-fall frames are dropped; each trajectory is labeled by its <em>measured</em> average velocity rather
+          than its commanded target, since the two diverge at higher speeds), and trains a Transformer to predict
+          16-step action chunks via optimal-transport Flow Matching — a deterministic alternative to diffusion that
+          learns a velocity field along (nearly) straight-line paths between noise and data, which lets the ODE
+          solver take much larger integration steps at inference. Online, predictions from overlapping chunks are
+          combined with exponentially-weighted temporal ensembling to suppress jitter.</p>
+
+          <h4>My contribution</h4>
+          <p class="ph">[Paper lists two co-authors without a stated split — note which half was specifically
+          yours: the PPO/phase-mirroring expert side, or the Flow Matching/Transformer/data-pipeline side.]</p>
+
+          <h4>Results and what it is worth</h4>
+          <p>Phase-based mirroring is the clear winner for symmetry: it cuts the Overall Symmetric Index by 83% versus
+          a plain reward-shaped PPO (96.3 → 16.0) and by 68% versus the Mirrored-PPO auxiliary-loss baseline (49.6 →
+          16.0), becoming the expert used for all downstream data collection. The resulting Flow Matching policy then
+          generalizes continuously from 0.5 to 3.0 m/s in 0.1 m/s steps — a range the discrete expert was never
+          evaluated at outside its six training speeds — holding success rates above 80% at most velocities (100% at
+          several) and tracking error typically under 0.4 m/s, with one weak region around 1.6&ndash;1.8 m/s where
+          success drops to 20% and tracking error spikes, likely a mode-averaging artifact where the dataset's
+          medium- and high-speed gait strategies overlap and conflict. Its gait symmetry (SI 18&ndash;45) lands
+          between the phase-mirrored expert and the Mirrored-PPO baseline — looser than the expert it was trained
+          on, but still far better than plain PPO. The practical payoff is largely computational: because the
+          optimal-transport flow traces nearly straight paths, the ODE solver needs far fewer function evaluations
+          than a diffusion-based alternative would, which is what makes this fast enough for closed-loop control.</p>
         </div>
-        <div class="tags"><span>ROS 2</span><span>D* Lite</span><span>Costmaps</span><span>Bayesian update</span></div>
       </article>
 
-      <!-- ---------- PROJECT 4 ---------- -->
-      <article class="project" id="p4">
-        <p class="label">Project 04 · Internship · Summer 2024</p>
-        <h3>Bin-Picking for Ship Components</h3>
-        <p class="tagline">A deployed bin-picking cell that grasped nine part types out of unsorted bins at roughly an 85% success rate.</p>
-
-        <div class="media"><span class="label">Media placeholder — cell photo or grasp sequence<br>(check with the host lab before publishing any footage)</span></div>
-
-        <div class="facts">
-          <div><span class="label">My role</span><p class="ph">[intern — perception setup &amp; calibration]</p></div>
-          <div><span class="label">Host</span><p>SJTU–Fraunhofer Intelligent Manufacturing Innovation Center</p></div>
-          <div><span class="label">Tools</span><p class="ph">[3D camera model] · [robot arm] · CAD</p></div>
-          <div><span class="label">Outcome</span><p>~85% grasp success</p></div>
+      <!-- ---------- SHADOW HAND ---------- -->
+      <article class="project" id="p-shadow">
+        <div class="proj-head">
+          <div class="thumb">Media placeholder — cube reorientation rollout</div>
+          <div class="proj-text">
+            <a class="proj-title" href="#p-shadow">Dexterous In-Hand Manipulation with Shadow Hand</a>
+            <p class="meta">With Xinxuan Tang · Mechanical Engineering, CMU</p>
+            <p class="tagline">A systematic comparison of RL paradigms — PPO, SAC, and CEM — on Shadow Hand cube reorientation, plus two modifications (domain randomization, and a diffusion-based on-policy generative policy) aimed at robustness and expressiveness.</p>
+          </div>
         </div>
 
-        <div class="imrd">
-          <div><h4>The problem</h4><p class="ph">[Ship parts arrive unsorted in bins; a person picks and orients them all day.]</p></div>
-          <div><h4>Approach</h4><p class="ph">[CAD models of nine part types → 3D camera install → hand–eye calibration → grasp planning.]</p></div>
-          <div><h4>My contribution</h4><p class="ph">[What you personally built and measured.]</p></div>
-          <div><h4>Results and what it is worth</h4><p class="ph">[85% over how many picks? What broke the other 15%?
-          Value: taking a repetitive lifting job off a person's shoulders.]</p></div>
+        <div class="proj-body">
+          <h4>The problem</h4>
+          <p>Cube reorientation with a 24-DoF Shadow Hand (157-dim observation, 20-dim action) is a high-dimensional,
+          contact-rich control problem. A standard Gaussian policy is also structurally mismatched to it: there are
+          multiple valid finger configurations that achieve the same target orientation, and a unimodal distribution
+          collapses them into one averaged — often brittle — behavior.</p>
+
+          <h4>Approach</h4>
+          <p>On the Isaac-Repose-Cube-Shadow-Direct-v0 environment (dense reward: distance penalty, a rotation term
+          that grows sharply near the goal, action regularization, a sparse success bonus, a fall penalty), we
+          benchmark PPO (32 and 512 parallel environments, to isolate the effect of rollout parallelism), SAC, CEM,
+          and a random baseline on identical settings. On top of that, we evaluate two modifications: (1) domain
+          randomization over object mass, surface friction, joint damping, and observation/action noise at every
+          reset, to fight simulator overfitting; and (2) GenPO, which replaces PPO's Gaussian policy head with an
+          invertible diffusion policy — a doubled dummy-action construction makes the diffusion process invertible,
+          which makes exact log-likelihoods tractable via a change-of-variables formula, so PPO's clipped surrogate
+          objective, entropy regularization, and KL-adaptive learning rate all still apply to a genuinely multimodal
+          policy.</p>
+
+          <h4>My contribution</h4>
+          <p class="ph">[Paper doesn't break the two-person split out explicitly — note which half was yours: the
+          baseline sweep / domain randomization side, or the GenPO diffusion-policy side.]</p>
+
+          <h4>Results and what it is worth</h4>
+          <p>Against a random-baseline mean return of &minus;135.13, PPO dominates SAC and CEM outright, and
+          parallelism matters enormously: PPO with 512 environments reaches both the highest final reward and by
+          far the highest consecutive-success score, while PPO32 plateaus much lower and SAC/CEM stay near zero
+          for most of training &mdash; SAC's replay buffer gets flooded with low-quality early-policy transitions
+          faster than its critic can correct for them, and CEM's sampling-based search doesn't scale to a 20-dim
+          action space without a learned value function. Domain randomization learns slower early on but keeps
+          improving over a much longer horizon, ending at a high, robust consecutive-success score — the expected
+          robustness/sample-efficiency trade-off. GenPO matches or exceeds vanilla PPO's final reward with
+          noticeably smoother, lower-variance learning curves, evidence that the multimodal diffusion policy is
+          genuinely representing more than one viable manipulation strategy rather than collapsing to one.</p>
         </div>
-        <div class="tags"><span>Hand–eye calibration</span><span>3D vision</span><span>Grasp planning</span><span>Deployment</span></div>
       </article>
 
-      <!-- ---------- PROJECT 5 ---------- -->
-      <article class="project" id="p5">
-        <p class="label">Project 05 · Additional material · SJTU Robotics Institute</p>
-        <h3>Soft Pneumatic Actuators and Dielectric Elastomers</h3>
-        <p class="tagline ph">[One sentence: undergraduate research on robots made of rubber instead of rigid links.]</p>
-        <div class="media"><span class="label">Media placeholder — actuator bending / test rig</span></div>
-        <div class="imrd">
-          <div><h4>What it was</h4><p class="ph">[Short version — fabrication, modeling, testing. Advisor: Prof. Chen Feifei.]</p></div>
-          <div><h4>Why it is here</h4><p class="ph">[What it proves about you: hands-on fabrication and a tolerance for
-          messy, non-ideal hardware — useful evidence for a planning engineer.]</p></div>
+      <!-- ---------- DRONE / 24-785 ---------- -->
+      <article class="project" id="p-drone">
+        <div class="proj-head">
+          <div class="thumb">Media placeholder — 3D rendering of optimized vs. reference trajectories</div>
+          <div class="proj-text">
+            <a class="proj-title" href="#p-drone">Optimal Control of Quadrotor for Obstacle Avoidance</a>
+            <p class="meta">24-785 · Team 8, with Burhan Shirose, Qihang Shan, Madeline Hoedemaker</p>
+            <p class="tagline">A nonconvex trajectory-optimization pipeline that steers three planar quadrotors past two moving obstacles while tracking a reference trajectory, solved and cross-checked with two different NLP solvers.</p>
+          </div>
         </div>
-        <div class="tags"><span>Soft robotics</span><span>Fabrication</span><span>Modeling</span></div>
-        <div class="todo"><b>TODO:</b> The assignment says additional material gets comments but is not graded, so keep
-        this entry short. Two alternates could take its place: Shadow Hand in-hand reorientation (PPO / SAC / GenPO)
-        and multi-quadrotor obstacle avoidance via optimal control (24-785).</div>
+
+        <div class="proj-body">
+          <h4>The problem</h4>
+          <p>Generate dynamically-feasible, collision-free trajectories for three quadrotors navigating two moving
+          obstacles over a 5-second horizon, minimizing trajectory-tracking error and control effort subject to the
+          quadrotor's own dynamics, thrust limits, a minimum inter-robot separation, and a minimum clearance from
+          each obstacle.</p>
+
+          <h4>Approach</h4>
+          <p>Each quadrotor is modeled as a 6-state planar vehicle (position, pitch, their velocities) with 2 thrust
+          inputs; Hermite&ndash;Simpson collocation enforces dynamic feasibility between time steps. The resulting
+          nonconvex NLP is solved two ways &mdash; Julia's <code>fmincon</code> (interior-point) and SciPy's SLSQP
+          (quasi-Newton SQP) &mdash; each from multiple random initial guesses, since the collision-avoidance
+          constraints make the feasible region non-convex and both solvers only find local minima. A sensitivity
+          study then sweeps the cost weights (state-tracking <em>Q</em>, control-effort <em>R</em>, terminal
+          <em>Q<sub>f</sub></em>) and the safety margins (inter-robot distance, obstacle radius) against the
+          baseline, and a Lagrange-multiplier analysis identifies exactly which constraints are actually binding
+          the solution.</p>
+
+          <h4>My contribution</h4>
+          <p>Developed the <code>fmincon</code> pipeline in Julia; wrote the Problem Definition and fmincon slides,
+          and the Project Statement and Optimization Study (fmincon part) of the final report.</p>
+
+          <h4>Results and what it is worth</h4>
+          <p><code>fmincon</code>'s best-of-5 multi-start run reached an objective of 326 in 83.4 s with 1.165 m
+          average tracking error; SLSQP's best-of-10 run reached &asymp;328 in 585 s &mdash; seven times slower
+          &mdash; with 1.871 m average error, so for this problem size the interior-point method was both faster and
+          more accurate. The sensitivity sweep showed raising the state-tracking weight <em>Q</em> tenfold cut
+          tracking error by 7.2% (the single most effective lever), while raising the terminal weight
+          <em>Q<sub>f</sub></em> cut final-position error by about 60% at the cost of 3.1% worse average tracking
+          &mdash; a clean path-accuracy-vs-endpoint-accuracy trade-off. On the safety side, widening the obstacle
+          clearance from 0.3 m to 0.8 m was the most expensive constraint, costing 8.0% more tracking error, while
+          relaxing inter-quad spacing from 0.8 m to 0.3 m improved tracking by 4.3%; the Lagrange-multiplier analysis
+          confirmed this directly, with the obstacle-avoidance constraints carrying the largest active multipliers
+          (up to &asymp;24) at exactly the moments each quadrotor passed closest to a moving obstacle.</p>
+        </div>
+      </article>
+
+      <!-- ---------- VEGETATION / 16-350 ---------- -->
+      <article class="project" id="p-veg">
+        <div class="proj-head">
+          <div class="thumb">Media placeholder — Gazebo scene / costmap before &amp; after</div>
+          <div class="proj-text">
+            <a class="proj-title" href="#p-veg">Proprioceptive Navigation Through Vegetation</a>
+            <p class="meta">16-350 · Course project · Mar – May 2025</p>
+            <p class="tagline ph">[One sentence: a ground robot that learns which tall grass it can drive through.]</p>
+          </div>
+        </div>
+
+        <div class="proj-body">
+          <h4>The problem</h4>
+          <p class="ph">[Lidar sees grass as a wall; the robot stops for obstacles that are not obstacles.]</p>
+
+          <h4>Approach</h4>
+          <p class="ph">[D* Lite over a custom Nav2 costmap, with a contact model that updates
+          traversability from what the robot feels as it drives.]</p>
+
+          <h4>My contribution</h4>
+          <p class="ph">[Which module was yours; what you tuned and validated.]</p>
+
+          <h4>Results and what it is worth</h4>
+          <p class="ph">[Path length / replan count / success across N trials.
+          Value: search-and-rescue and agricultural robots that stop giving up on passable terrain.]</p>
+        </div>
+      </article>
+
+      <!-- ---------- MAZE SOLVER / 24-668 ---------- -->
+      <article class="project" id="p-maze">
+        <div class="proj-head">
+          <div class="thumb">Media placeholder — platform photo (Fig. 1–4 from the paper)</div>
+          <div class="proj-text">
+            <a class="proj-title" href="#p-maze">Tilted: A Low-Cost Mechatronic Maze-Solving Platform</a>
+            <p class="meta">24-668 Mechatronics Applications in Mechanical Engineering · with Avery Kress, Nathan O&rsquo;Neill, Sander Schulman · Fall 2025</p>
+            <p class="tagline">A 2-DOF tilting-plate robot that autonomously solves arbitrary laser-cut mazes: it tilts the plate to roll a ball to the goal, using an overhead camera for vision, A* for path planning, and a discrete-time LQR for control.</p>
+          </div>
+        </div>
+
+        <div class="proj-body">
+          <h4>The problem</h4>
+          <p>Guide a ball from a start cell to a goal cell through an arbitrary 2D maze cut into a square plate,
+          actuated in roll and pitch by two hobby servos, using only a single overhead camera for sensing and an
+          onboard battery for power — while staying within servo angle limits and without the ball leaving the
+          maze.</p>
+
+          <h4>Approach</h4>
+          <p>Mechanically, a nested-ring gimbal (laser-cut plywood inner rings, an acrylic outer ring) carries an
+          8&Prime;&times;8&Prime; maze plate with a whiteboard sticker so mazes can be redrawn; HS-645MG servos drive
+          each axis through short linkages, with hard stops to about &plusmn;6&deg;. A Raspberry Pi 5 and camera run
+          an HSV-based pipeline to find the ball and goal and a Canny-edge pipeline to extract the maze walls into a
+          binary occupancy map; a separate boundary-contour check keeps the ball from rolling off the plate edge
+          regardless of the maze itself. Path planning builds a distance-transform cost map from that occupancy
+          map and runs A*, then a low-pass filter removes the grid search's zig-zag, and a curvature-aware
+          look-ahead selector densifies waypoints on tight turns and backs off the look-ahead distance near corners.
+          Control linearizes the ball-on-plate dynamics (<code>ẍ = (5g/7)&theta;</code>), discretizes at 100 Hz, and
+          runs a per-axis discrete-time infinite-horizon LQR with a feedforward term — tunable live through a GUI
+          that visualizes closed-loop eigenvalues and step response, which doubles as a teaching tool for
+          state-space control. An Arduino (chosen over the Pi for deterministic PWM timing) drives the servos at
+          0.25&deg; resolution and runs an IMU-based auto-leveling routine before every run to compensate for
+          mechanical drift.</p>
+
+          <h4>My contribution</h4>
+          <p class="ph">[Team of four — note which subsystem (mechanical / electronics / vision / planning /
+          control) was specifically yours, and any bugs or design calls you want to call out by name.]</p>
+
+          <h4>Results and what it is worth</h4>
+          <p>Across four canonical maze types (10 trials each), the system reached 100% success on straight-line
+          and single-turn mazes with low steady-state error, 70% on U-turns, and 60% on multi-turn/spiral mazes.
+          Failures concentrated on sustained-curvature paths, where accumulated friction, vision latency, and tilt
+          saturation compound as the ball continuously changes direction — a clear limit of the linearized model
+          rather than of the mechanism itself.</p>
+        </div>
       </article>
     </div>
   </section>
 
+  <div class="divider"></div>
+
   <!-- ============================ SKILLS ============================ -->
   <section id="skills">
     <div class="wrap">
-      <div class="sec-head">
-        <span class="label">03</span>
-        <h2>Skills at a glance</h2>
-        <span class="label" style="margin-left:auto">For recruiters scanning in 20 seconds</span>
-      </div>
+      <div class="sec-head"><h2>Skills at a glance</h2></div>
+      <p class="sec-note">For recruiters scanning in 20 seconds.</p>
       <div class="skills">
-        <div class="col">
+        <div>
           <h3>Planning &amp; control</h3>
           <ul>
             <li>Sampling-based planning (RRT, KPIECE)</li>
@@ -501,7 +633,7 @@
             <li class="ph">[add / trim to match the job posting]</li>
           </ul>
         </div>
-        <div class="col">
+        <div>
           <h3>Robot learning</h3>
           <ul>
             <li>Imitation learning: ACT, diffusion policy, flow matching</li>
@@ -509,7 +641,7 @@
             <li>Dataset building and policy evaluation</li>
           </ul>
         </div>
-        <div class="col">
+        <div>
           <h3>Systems &amp; hardware</h3>
           <ul>
             <li>ROS / ROS 2, Nav2, Gazebo</li>
@@ -517,7 +649,7 @@
             <li>UR10e, PR2, Husky; 3D cameras and hand–eye calibration</li>
           </ul>
         </div>
-        <div class="col">
+        <div>
           <h3>Engineering practice</h3>
           <ul>
             <li>Python, C++, PyTorch</li>
@@ -526,28 +658,26 @@
           </ul>
         </div>
       </div>
-      <div class="todo"><b>TODO:</b> The assignment asks you to make it easy for employers to find the skills they are
-      looking for. Read the postings you actually want, check their keywords against this screen one by one, and
+      <div class="todo"><b>TODO:</b> Read the postings you actually want, check their keywords against this screen one by one, and
       order the columns by the role you most want to be hired for.</div>
     </div>
   </section>
 
+  <div class="divider"></div>
+
   <!-- ============================ RESUME ============================ -->
   <section id="resume">
     <div class="wrap">
-      <div class="sec-head">
-        <span class="label">04</span>
-        <h2>Résumé</h2>
-      </div>
+      <div class="sec-head"><h2>Résumé</h2></div>
       <div class="resume-grid">
-        <div class="resume-frame"><span class="label">One-page résumé preview<br>(embed the PDF here, US Letter)</span></div>
+        <div class="resume-frame">One-page résumé preview<br>(embed the PDF here, US Letter)</div>
         <div>
           <p class="ph">[A short orientation line: what the résumé covers, and the version on this page —
           planning and controls. Say when it was last updated.]</p>
-          <div class="cta-row">
-            <a class="btn" href="#resume">Download PDF</a>
-            <a class="btn ghost" href="#contact">Ask for the other version</a>
-          </div>
+          <p class="resume-links">
+            <a href="#resume">Download PDF</a><span class="sep">/</span>
+            <a href="#contact">Ask for the other version</a>
+          </p>
           <div class="todo">
             <b>TODO:</b> The course wants a one-page résumé in English; the current one is a Chinese docx, so it needs
             a US Letter rewrite. Serve it as a PDF — it previews in the browser and the layout cannot shift — with a
@@ -559,19 +689,18 @@
     </div>
   </section>
 
+  <div class="divider"></div>
+
   <!-- ============================ CONTACT ============================ -->
   <section id="contact">
     <div class="wrap">
-      <div class="sec-head">
-        <span class="label">05</span>
-        <h2>Get in touch</h2>
-      </div>
+      <div class="sec-head"><h2>Get in touch</h2></div>
       <p class="ph" style="max-width:var(--measure)">[One line inviting contact — say what you would like to hear about.]</p>
       <div class="contact-list">
-        <div><span class="label">Email</span><p><a href="mailto:haozhenz@andrew.cmu.edu">haozhenz@andrew.cmu.edu</a></p></div>
-        <div><span class="label">GitHub</span><p><a href="https://github.com/Benny-Zhu-398" rel="noopener">github.com/Benny-Zhu-398</a></p></div>
-        <div><span class="label">LinkedIn</span><p class="ph">[add your profile URL]</p></div>
-        <div><span class="label">Google Scholar</span><p class="ph">[optional — you have a 2023 co-authored review]</p></div>
+        <div><span class="k">Email</span><a href="mailto:haozhenz@andrew.cmu.edu">haozhenz@andrew.cmu.edu</a></div>
+        <div><span class="k">GitHub</span><a href="https://github.com/Benny-Zhu-398" rel="noopener">github.com/Benny-Zhu-398</a></div>
+        <div><span class="k">LinkedIn</span><span class="ph">[add your profile URL]</span></div>
+        <div><span class="k">Google Scholar</span><span class="ph">[optional — you have a 2023 co-authored review]</span></div>
       </div>
     </div>
   </section>
@@ -584,23 +713,6 @@
 </footer>
 
 <script>
-  // ---- Draft style picker (delete this along with .styler before publishing) ----
-  (function () {
-    var root = document.documentElement;
-    var btns = Array.prototype.slice.call(document.querySelectorAll('.styler button'));
-    function apply(name) {
-      if (name === 'plex') { root.removeAttribute('data-style'); }
-      else { root.setAttribute('data-style', name); }
-      btns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.set === name)); });
-      try { localStorage.setItem('draft-style', name); } catch (e) {}
-    }
-    btns.forEach(function (b) { b.addEventListener('click', function () { apply(b.dataset.set); }); });
-    try {
-      var saved = localStorage.getItem('draft-style');
-      if (saved) { apply(saved); }
-    } catch (e) {}
-  })();
-
   // ---- Nav highlighting: mark the section currently in view ----
   (function () {
     var links = Array.prototype.slice.call(document.querySelectorAll('nav.main a'));
